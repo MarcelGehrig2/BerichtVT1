@@ -1,0 +1,122 @@
+\begin{theglossary}\glogroupA
+
+\gloitem {\glosslabel{glo:awk}{awk}}Skriptsprache zur Bearbeitung und Auswertung strukturierter Textdaten, beispielsweise CSV-Dateien\relax
+\glodelim 
+		\glsnumformat{20}\delimT \gloskip \glogroupB
+
+\gloitem {\glosslabel{glo:BBB}{BBB}}BeagleBone Black: Kostengünstiger Einplatinen-Computer von Texas Instruments\relax
+\glodelim 
+		\glsnumformat{20}\delimT 
+
+\gloitem {\glosslabel{glo:BBB-Derivat}{BBB-Derivat}}BeagleBone-Derivat: Das Produkt, das in dieser Bachelorarbeit in Zusammenarbeit mit Variosystems hergestellt wurde. Es hat den selben Funktionsumfang wie der BBB\relax
+\glodelim 
+		\glsnumformat{20}\delimT 
+
+\gloitem {\glosslabel{glo:BeagleBone Black}{BeagleBone Black}}Siehe BBB\relax
+\glodelim 
+		\glsnumformat{20}\delimT 
+
+\gloitem {\glosslabel{glo:BLE}{BLE}}Bluetooth Low Energy: Standard für eine Funktechnik, die mit sehr geringen Stromverbrauch Geräte in einer Umgebung von 10 Meter vernetzen kann\relax
+\glodelim 
+		\glsnumformat{20}\delimT \gloskip \glogroupC
+
+\gloitem {\glosslabel{glo:Cape}{Cape}}Erweiterung speziell für den BBB\relax
+\glodelim 
+		\glsnumformat{20}\delimT \gloskip \glogroupD
+
+\gloitem {\glosslabel{glo:Designator}{Designator}}Eindeutige Bezeichnung aus einem Buchstaben und einer Zahl für ein elektrisches Bauteil in einem Schema oder PCB-Layout\relax
+\glodelim 
+		\glsnumformat{20}\delimT \gloskip \glogroupE
+
+\gloitem {\glosslabel{glo:eCAD}{eCAD}}Electronic Computer-Aided Design: Computerprogramm zum Entwerfen von elektrischen Layouts und PCB\relax
+\glodelim 
+		\glsnumformat{20}\delimT 
+
+\gloitem {\glosslabel{glo:EEPROM}{EEPROM}}Electrically Erasable Programmable Read-Only Memory: nichtflüchtiger, elektronischer Speicher für kleine Datenmengen\relax
+\glodelim 
+		\glsnumformat{20}\delimT 
+
+\gloitem {\glosslabel{glo:eMMC}{eMMC}}Embedded Multimedia Card: Massenspeicher mit Flashspeicher, MMC-Interface und Controller. Ersetzt im BBB die Festplatte\relax
+\glodelim 
+		\glsnumformat{20}\delimT \gloskip \glogroupF
+
+\gloitem {\glosslabel{glo:Footprint}{Footprint}}Die Umrisse von Lötflächen von elektrischen Bauelementen auf einer Leiterplatte\relax
+\glodelim 
+		\glsnumformat{20}\delimT \gloskip \glogroupG
+
+\gloitem {\glosslabel{glo:GPIO}{GPIO}}General Purpose Input/Output: Schnittstelle die die meisten Mikrocontroller besitzen um mit externen Geräten zu kommunizieren\relax
+\glodelim 
+		\glsnumformat{20}\delimT \gloskip \glogroupH
+
+\gloitem {\glosslabel{glo:HDMI}{HDMI}}High Definition Multimedia Interface: Eine Schnittstelle für die volldigitale Übertragung von Audio- und Videodaten\relax
+\glodelim 
+		\glsnumformat{20}\delimT \gloskip \glogroupI
+
+\gloitem {\glosslabel{glo:I$^2$C}{I$^2$C}}Inter-Integrated Circuit: serieller Datenbus, welcher für die Kommunikation zwischen Bauteilen auf einem PCB verwendet wird\relax
+\glodelim 
+		\glsnumformat{20}\delimT \gloskip \glogroupL
+
+\gloitem {\glosslabel{glo:LAN}{LAN}}Local Area Network: Netzwerk mit einer Ausdehnung, von i.d.R. mehreren Räumen\relax
+\glodelim 
+		\glsnumformat{20}\delimT 
+
+\gloitem {\glosslabel{glo:LCD}{LCD}}Liquid Cristal Display: Flachbildschirm\relax
+\glodelim 
+		\glsnumformat{20}\delimT \gloskip \glogroupM
+
+\gloitem {\glosslabel{glo:MAC}{MAC}}Media Access Control: Dieser Controller wird zusammen mit einer RJ45-Buchse und einem PHY für eine Ethernet-Schnittstelle benötigt\relax
+\glodelim 
+		\glsnumformat{20}\delimT 
+
+\gloitem {\glosslabel{glo:McASP}{McASP}}Multichannel Audio Serial Port: Datenbus für Audiodaten\relax
+\glodelim 
+		\glsnumformat{20}\delimT \gloskip \glogroupP
+
+\gloitem {\glosslabel{glo:PCB}{PCB}}Printed Circuit Board: Elektronische Platine, auf welcher die elektronischen Bauteile aufgelötet werden. Wird auch Platine genannt.\relax
+\glodelim 
+		\glsnumformat{20}\delimT 
+
+\gloitem {\glosslabel{glo:PHY}{PHY}}PHYsical Layer: Spezieller integrierter Schaltkreis der die modulierten analogen Daten des LAN-Anschlusses in digitale Daten wandelt und umgekehrt. Dieses Bauteil wird zusammen mit einer RJ45-Buchse und einem MAC für eine Ethernet-Schnittstelle benötigt\relax
+\glodelim 
+		\glsnumformat{20}\delimT 
+
+\gloitem {\glosslabel{glo:Python}{Python}}Universelle Programmiersprache\relax
+\glodelim 
+		\glsnumformat{20}\delimT \gloskip \glogroupR
+
+\gloitem {\glosslabel{glo:RAM}{RAM}}Random-Access Memory: wird von Prozessoren als Arbeitsspeicher benötigt\relax
+\glodelim 
+		\glsnumformat{20}\delimT 
+
+\gloitem {\glosslabel{glo:RS232}{RS232}}Standard für eine serielle Schnittstelle mit definiertem Spannungspegel\relax
+\glodelim 
+		\glsnumformat{20}\delimT \gloskip \glogroupS
+
+\gloitem {\glosslabel{glo:SDIO}{SDIO}}Secure Digital Input Output: Vielseitiger Datenbus, welcher unter Anderem für SD-Karten verwendet wird\relax
+\glodelim 
+		\glsnumformat{20}\delimT 
+
+\gloitem {\glosslabel{glo:SMT}{SMT}}Surface Mounted Technology: Oberflächenmontage. Die elektrischen Bauteile werden nur auf der Oberfläche des PCB gelötet\relax
+\glodelim 
+		\glsnumformat{20}\delimT 
+
+\gloitem {\glosslabel{glo:SPI}{SPI}}Serial Peripheral Interface: Bus-System nach dem Master-Slave-Prinzip zur Verbindung von digitalen Schaltungen\relax
+\glodelim 
+		\glsnumformat{20}\delimT \gloskip \glogroupT
+
+\gloitem {\glosslabel{glo:THT}{THT}}Through Hole Technology: Durchsteckmontage. Die Bauelemente haben Drähte als Anschluss, die durch das PCB gesteckt werden\relax
+\glodelim 
+		\glsnumformat{20}\delimT \gloskip \glogroupU
+
+\gloitem {\glosslabel{glo:UART}{UART}}Standard für eine serielle Schnittstelle\relax
+\glodelim 
+		\glsnumformat{20}\delimT 
+
+\gloitem {\glosslabel{glo:USB}{USB}}Universal Serial Bus: Serielles Bussystem zur Verbindung eines Computers mit externen Geräten\relax
+\glodelim 
+		\glsnumformat{20}\delimT \gloskip \glogroupW
+
+\gloitem {\glosslabel{glo:WLAN}{WLAN}}Kabelloser Standard für LAN\relax
+\glodelim 
+		\glsnumformat{20}\delimT 
+\end{theglossary}

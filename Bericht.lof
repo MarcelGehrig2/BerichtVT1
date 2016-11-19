@@ -1,0 +1,35 @@
+\select@language {ngerman}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Morphologischer Kasten}}{3}{figure.1.1}
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Ein sinnbildliches Anwendungsszenario}}{5}{figure.1.2}
+\contentsline {figure}{\numberline {1.3}{\ignorespaces Grafische Darstellung der Arbeitsstunden von Alexander Bucher}}{6}{figure.1.3}
+\contentsline {figure}{\numberline {1.4}{\ignorespaces Grafische Darstellung der Arbeitsstunden von Philippe R\IeC {\"u}esch}}{6}{figure.1.4}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Das BeagleBoard mit seinen Eigenschaften }}{11}{figure.3.1}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Blockschaltbild der Basisstation}}{14}{figure.4.1}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Aus dem Datenblatt: F = $1.0\tmspace +\thinmuskip {.1667em}A$ Tr\IeC {\"a}ge, Cx = $0.22\tmspace +\thinmuskip {.1667em}\mu F$, R = $1.0\tmspace +\thinmuskip {.1667em}M\Omega $, L = $7.5\tmspace +\thinmuskip {.1667em}mH$, Cy = $2.2\tmspace +\thinmuskip {.1667em}nF$}}{15}{figure.4.2}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Die Backplane in der Draufsicht}}{15}{figure.4.3}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Schema der Spannungsversorgung}}{16}{figure.4.4}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Schema des USB Interfaces}}{17}{figure.4.5}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Schema des Kartenlesers}}{19}{figure.4.6}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Das BeagleBoard in der Draufsicht}}{20}{figure.4.7}
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Steckerbelegung J4 und J5 des BeagleBoards}}{20}{figure.4.8}
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Schematische Darstellung der Levelshifter}}{21}{figure.4.9}
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Schematische Darstellung des Touchcontrollers}}{21}{figure.4.10}
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Benutzeraktion EOG-Kanalauswahl zur Funktionskontrolle }}{23}{figure.4.11}
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Statemachine des MSP430}}{25}{figure.4.12}
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Beispiel eines Befehls mit OpCode (orange)}}{25}{figure.4.13}
+\contentsline {figure}{\numberline {4.14}{\ignorespaces Datepaket des nRF905}}{26}{figure.4.14}
+\contentsline {figure}{\numberline {4.15}{\ignorespaces Auflistung der Frequenzen des nRF905}}{27}{figure.4.15}
+\contentsline {figure}{\numberline {4.16}{\ignorespaces Dateiberechtigung f\IeC {\"u}r \lstinline {su} nach der Modifikation }}{30}{figure.4.16}
+\contentsline {figure}{\numberline {4.17}{\ignorespaces Screenshot der Benutzeroberfl\IeC {\"a}che: 1. Register \emph {Patientendaten} }}{31}{figure.4.17}
+\contentsline {figure}{\numberline {4.18}{\ignorespaces Screenshot der Benutzeroberfl\IeC {\"a}che: 3. Register \emph {Messung} }}{32}{figure.4.18}
+\contentsline {figure}{\numberline {4.19}{\ignorespaces Screenshot Geburtsdatum-Dialog }}{34}{figure.4.19}
+\contentsline {figure}{\numberline {4.20}{\ignorespaces Sequenzdiagramm des Geburtsdatum-\IeC {\"A}ndern-Button's }}{37}{figure.4.20}
+\contentsline {figure}{\numberline {4.21}{\ignorespaces CAD-Modell des Geh\IeC {\"a}use }}{38}{figure.4.21}
+\contentsline {figure}{\numberline {4.22}{\ignorespaces Fotos des Geh\IeC {\"a}use }}{39}{figure.4.22}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Beispiel GUI des ersten Registers im neuen Konzept }}{42}{figure.5.1}
+\addvspace {10\p@ }

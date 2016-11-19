@@ -1,0 +1,30 @@
+\glossaryentry{eCAD@{\glosslabel{glo:eCAD}{eCAD}}Electronic Computer-Aided Design: Computerprogramm zum Entwerfen von elektrischen Layouts und PCB\relax|glsnumformat}{20}
+\glossaryentry{PCB@{\glosslabel{glo:PCB}{PCB}}Printed Circuit Board: Elektronische Platine, auf welcher die elektronischen Bauteile aufgelötet werden. Wird auch Platine genannt.\relax|glsnumformat}{20}
+\glossaryentry{BBB@{\glosslabel{glo:BBB}{BBB}}BeagleBone Black: Kostengünstiger Einplatinen-Computer von Texas Instruments\relax|glsnumformat}{20}
+\glossaryentry{BBB-Derivat@{\glosslabel{glo:BBB-Derivat}{BBB-Derivat}}BeagleBone-Derivat: Das Produkt, das in dieser Bachelorarbeit in Zusammenarbeit mit Variosystems hergestellt wurde. Es hat den selben Funktionsumfang wie der BBB\relax|glsnumformat}{20}
+\glossaryentry{BeagleBone Black@{\glosslabel{glo:BeagleBone Black}{BeagleBone Black}}Siehe BBB\relax|glsnumformat}{20}
+\glossaryentry{PHY@{\glosslabel{glo:PHY}{PHY}}PHYsical Layer: Spezieller integrierter Schaltkreis der die modulierten analogen Daten des LAN-Anschlusses in digitale Daten wandelt und umgekehrt. Dieses Bauteil wird zusammen mit einer RJ45-Buchse und einem MAC für eine Ethernet-Schnittstelle benötigt\relax|glsnumformat}{20}
+\glossaryentry{MAC@{\glosslabel{glo:MAC}{MAC}}Media Access Control: Dieser Controller wird zusammen mit einer RJ45-Buchse und einem PHY für eine Ethernet-Schnittstelle benötigt\relax|glsnumformat}{20}
+\glossaryentry{HDMI@{\glosslabel{glo:HDMI}{HDMI}}High Definition Multimedia Interface: Eine Schnittstelle für die volldigitale Übertragung von Audio- und Videodaten\relax|glsnumformat}{20}
+\glossaryentry{eMMC@{\glosslabel{glo:eMMC}{eMMC}}Embedded Multimedia Card: Massenspeicher mit Flashspeicher, MMC-Interface und Controller. Ersetzt im BBB die Festplatte\relax|glsnumformat}{20}
+\glossaryentry{awk@{\glosslabel{glo:awk}{awk}}Skriptsprache zur Bearbeitung und Auswertung strukturierter Textdaten, beispielsweise CSV-Dateien\relax|glsnumformat}{20}
+\glossaryentry{Designator@{\glosslabel{glo:Designator}{Designator}}Eindeutige Bezeichnung aus einem Buchstaben und einer Zahl für ein elektrisches Bauteil in einem Schema oder PCB-Layout\relax|glsnumformat}{20}
+\glossaryentry{Cape@{\glosslabel{glo:Cape}{Cape}}Erweiterung speziell für den BBB\relax|glsnumformat}{20}
+\glossaryentry{WLAN@{\glosslabel{glo:WLAN}{WLAN}}Kabelloser Standard für LAN\relax|glsnumformat}{20}
+\glossaryentry{BLE@{\glosslabel{glo:BLE}{BLE}}Bluetooth Low Energy: Standard für eine Funktechnik, die mit sehr geringen Stromverbrauch Geräte in einer Umgebung von 10 Meter vernetzen kann\relax|glsnumformat}{20}
+\glossaryentry{LCD@{\glosslabel{glo:LCD}{LCD}}Liquid Cristal Display: Flachbildschirm\relax|glsnumformat}{20}
+\glossaryentry{SDIO@{\glosslabel{glo:SDIO}{SDIO}}Secure Digital Input Output: Vielseitiger Datenbus, welcher unter Anderem für SD-Karten verwendet wird\relax|glsnumformat}{20}
+\glossaryentry{I$^2$C@{\glosslabel{glo:I$^2$C}{I$^2$C}}Inter-Integrated Circuit: serieller Datenbus, welcher für die Kommunikation zwischen Bauteilen auf einem PCB verwendet wird\relax|glsnumformat}{20}
+\glossaryentry{EEPROM@{\glosslabel{glo:EEPROM}{EEPROM}}Electrically Erasable Programmable Read-Only Memory: nichtflüchtiger, elektronischer Speicher für kleine Datenmengen\relax|glsnumformat}{20}
+\glossaryentry{RAM@{\glosslabel{glo:RAM}{RAM}}Random-Access Memory: wird von Prozessoren als Arbeitsspeicher benötigt\relax|glsnumformat}{20}
+\glossaryentry{Python@{\glosslabel{glo:Python}{Python}}Universelle Programmiersprache\relax|glsnumformat}{20}
+\glossaryentry{SMT@{\glosslabel{glo:SMT}{SMT}}Surface Mounted Technology: Oberflächenmontage. Die elektrischen Bauteile werden nur auf der Oberfläche des PCB gelötet\relax|glsnumformat}{20}
+\glossaryentry{THT@{\glosslabel{glo:THT}{THT}}Through Hole Technology: Durchsteckmontage. Die Bauelemente haben Drähte als Anschluss, die durch das PCB gesteckt werden\relax|glsnumformat}{20}
+\glossaryentry{McASP@{\glosslabel{glo:McASP}{McASP}}Multichannel Audio Serial Port: Datenbus für Audiodaten\relax|glsnumformat}{20}
+\glossaryentry{Footprint@{\glosslabel{glo:Footprint}{Footprint}}Die Umrisse von Lötflächen von elektrischen Bauelementen auf einer Leiterplatte\relax|glsnumformat}{20}
+\glossaryentry{USB@{\glosslabel{glo:USB}{USB}}Universal Serial Bus: Serielles Bussystem zur Verbindung eines Computers mit externen Geräten\relax|glsnumformat}{20}
+\glossaryentry{LAN@{\glosslabel{glo:LAN}{LAN}}Local Area Network: Netzwerk mit einer Ausdehnung, von i.d.R. mehreren Räumen\relax|glsnumformat}{20}
+\glossaryentry{SPI@{\glosslabel{glo:SPI}{SPI}}Serial Peripheral Interface: Bus-System nach dem Master-Slave-Prinzip zur Verbindung von digitalen Schaltungen\relax|glsnumformat}{20}
+\glossaryentry{GPIO@{\glosslabel{glo:GPIO}{GPIO}}General Purpose Input/Output: Schnittstelle die die meisten Mikrocontroller besitzen um mit externen Geräten zu kommunizieren\relax|glsnumformat}{20}
+\glossaryentry{RS232@{\glosslabel{glo:RS232}{RS232}}Standard für eine serielle Schnittstelle mit definiertem Spannungspegel\relax|glsnumformat}{20}
+\glossaryentry{UART@{\glosslabel{glo:UART}{UART}}Standard für eine serielle Schnittstelle\relax|glsnumformat}{20}
