@@ -4,17 +4,64 @@
 \section{Vorwort}
 
 
+\section{EEROS}
+% kurze beschreibung von eeros
+EEROS (Easy Elegant Reliable ...TODO) ist ein open source Roboter Framework, welches an der NTB entwickelt wurde und auch immer noch in Entwicklung ist. %TODO eeros abkürzung
+Das Ziel von EEROS ist, möglichst einfach, zuverlässig und einfach in der Bedienung zu sein.
+Da das Framework besonders auch in industriellen Robotern zum Einsatz kommen soll, ist besonders auch die Zuverlässigkeit der Software ein wichtiger Punkt.
+Für die Software wird die objektorientierte Programmiersprache C++ verwendet. %TODO akronym für sw, besserer satz
+
+%TODO latex aufzählung
+EEROS kann in vier Hauptbereiche unterteilt werden.\\
+1.) Die HAL (Hardware Abstraction Layer) welche als Schnittstelle zur Hardware dient.\\
+2.) Das CS (Control System). Im CS wird die Regelung des Roboters aufgebaut.
+In diesem System wird aber nicht nur die Regelung gerechnet, sondern auch Aufgaben wie die Berechnung der Vorwärts- und inversen Kinematik werden hier erledigt.\\
+3.) Der Sequencer steuert den Ablauf des Roboters.
+Hier werden nicht nur Wegpunkte aufgelistet, sondern auch das allgemeine Verhalten definiert.\\%TODO besserer satz
+4.) Im SS (Safety System) werden sicherheitsrelevante Parameter überwacht. Das SS arbeitet unabhängig vom CS und vom Sequencer. Es löst einen Notaus aus, wenn der Roboter ausserhalb der zulässigen Parameter operiert. Ein möglicher Grund für einen Notstopp wäre zum Beispiel, wenn sich der Roboterarm in einem Sicherheitsbereich zu schnell bewegt.
+
+%TODO bild eeros system
+
+
 
 
 \section{Klarstellung der Benennungen}
 % Mischung englisch deutsch
-Sequencer anstelle von Sequenzer.
+Mit den meisten Programmiersprachen werden in englisch codiert.
+Auch die offizielle Online-Dokumentation von EEROS, und die Benennung von Komponenten und Konzepten,  ist in Englisch.
+In diesem Dokument wird an vielen Stellen bewusst darauf verzichtet, englische Bezeichnungen auf Deutsch zu übersetzen.
+Dies kann zu Deutsch - Englischen Mischwörter führen.
+Solche Mischwörter sind zwar nicht elegant, können aber besser für die Verständlichkeit sein und werden deshalb bewusst verwendet. %TODO 2 mal bewusst
+Auch einige Eigennamen, wie z.B. \textit{Sequencer} anstelle von \textit{Sequenzer} werden in diesem Dokument nicht auf Deutsch übersetzt.
 
-% applikation steuerung eeros
+%TODO synonym für arten
+In dieser Arbeit wird oft von drei verschiedenen Arten von Entwicklern gesprochen.
+Es wird zwischen EEROS-, Steuerungs-, und Applikations-Entwickler unterschieden.
+
+Der EEROS-Entwickler hat vertiefte Kenntnisse der Programmiersprache C++ und vom EEROS Framework.
+Seine Hauptaufgabe ist die Weiterentwicklung des Frameworks, welches vom Steuerungs-Entwickler verwendet wird.
+
+Der Steuerungs-Entwickler hat ebenfalls gute C++ Kenntnisse und nutzt das Framework, um eine Steuerung für einen Roboter zu entwickeln.
+Dafür muss er seine Software speziell auf den Roboter anpassen.
+Er bereitet auch erste Sequenzen für den Applikations-Entwickler vor.
+Oft wird die Entwicklung der Steuerung und der Applikation von der selben Person übernommen.
+
+Um den Ablauf des Roboters anzupassen, kann der Applikations-Entwickler bestehende Sequenzen einfach anpassen.
+Dazu werden nur grundlegende Programmierkenntnisse benötigt.
+Mit etwas erweiterten Kenntnissen kann er auch neue Sequenzen erstellen.
+%TODO viele wiederholungen: kenntnisse
 
 
-\section{EEROS}
-% kurze beschreibung von eeros
 
 \section{Aufgabenstellung}
-% kurze beschreibung der aufgabe
+In der aktuellen Version von EEROS existiert bereits eine erste Version von einem Sequencer.
+Dieser ist in seiner Funktionalität und Übersichtlichkeit aber stark eingeschränkt.
+Oft musste auf Tricks zurück gegriffen werden, damit bestimmte Aufgaben mit dem bestehenden Sequencer gelöst werden konnten.
+Um eine bestehende Sequenz anpassen zu können, auch wenn der Ablauf nur geringfügig geändert werden soll, ist schon viel Fachwissen notwendig.
+
+In dieser Vertiefungsarbeit sollen diese Probleme gelöst werden.
+Es soll ein neuer Sequencer entwickelt werden, der flexibel für verschiedenste Arten von Robotern eingesetzt werden kann.
+Die Sequenzen, welche den Ablauf des Roboters beschreiben, sollen dabei möglichst einfach und übersichtlich aufgebaut sein.
+Dank dem einfachen Aufbau soll es auch für einen Applikationsentwickler möglich sein, Sequenzen anzupassen und zu erstellen, auch wenn dieser Entwickler keine vertiefte Kenntnisse von C++ besitzt.
+
+% vorgehen: requirement, konzept, ausarbeitung, implementierung

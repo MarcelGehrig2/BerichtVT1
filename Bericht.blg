@@ -1,7 +1,6 @@
 This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: Bericht.aux
-A level-1 auxiliary file: EinleitungVorlage.aux
 A level-1 auxiliary file: Einleitung.aux
 A level-1 auxiliary file: EEROSAktuellerStand.aux
 A level-1 auxiliary file: AnforderungenAnSequencer.aux
@@ -13,7 +12,7 @@ I found no \bibdata command---while reading file Bericht.aux
 I found no \bibstyle command---while reading file Bericht.aux
 You've used 0 entries,
             0 wiz_defined-function locations,
-            90 strings with 619 characters,
+            89 strings with 598 characters,
 and the built_in function-call counts, 0 in all, are:
 = -- 0
 > -- 0
