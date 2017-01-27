@@ -5,13 +5,19 @@
 \BOOKMARK [1][-]{section.1.4}{Aufgabenstellung}{chapter.1}% 5
 \BOOKMARK [0][-]{chapter.2}{EEROS aktueller Stand}{}% 6
 \BOOKMARK [1][-]{section.2.1}{EEROS generell}{chapter.2}% 7
-\BOOKMARK [1][-]{section.2.2}{Aktuelle Implementierung des Sequenzers}{chapter.2}% 8
-\BOOKMARK [1][-]{section.2.3}{Fallbeispiel Parallelscara}{chapter.2}% 9
-\BOOKMARK [0][-]{chapter.3}{Anforderungen an den Sequencer}{}% 10
-\BOOKMARK [1][-]{section.3.1}{seciton}{chapter.3}% 11
-\BOOKMARK [0][-]{chapter.4}{Aufbau des Sequencers}{}% 12
-\BOOKMARK [1][-]{section.4.1}{Caller Stack}{chapter.4}% 13
-\BOOKMARK [0][-]{chapter.5}{Test des Sequencer}{}% 14
-\BOOKMARK [1][-]{section.5.1}{section}{chapter.5}% 15
-\BOOKMARK [0][-]{chapter.6}{Fazit}{}% 16
-\BOOKMARK [1][-]{section.6.1}{section}{chapter.6}% 17
+\BOOKMARK [1][-]{section.2.2}{Aktuelle Implementierung des Sequencers}{chapter.2}% 8
+\BOOKMARK [2][-]{subsection.2.2.1}{Sequencer}{section.2.2}% 9
+\BOOKMARK [2][-]{subsection.2.2.2}{Sequence}{section.2.2}% 10
+\BOOKMARK [2][-]{subsection.2.2.3}{Step}{section.2.2}% 11
+\BOOKMARK [2][-]{subsection.2.2.4}{Sub-Sequence}{section.2.2}% 12
+\BOOKMARK [2][-]{subsection.2.2.5}{Error-Handler}{section.2.2}% 13
+\BOOKMARK [1][-]{section.2.3}{Fallbeispiel 'EEDURO Delta Roboter'}{chapter.2}% 14
+\BOOKMARK [2][-]{subsection.2.3.1}{asdf}{section.2.3}% 15
+\BOOKMARK [0][-]{chapter.3}{Anforderungen an den Sequencer}{}% 16
+\BOOKMARK [1][-]{section.3.1}{Nicht Teil des Sequencer}{chapter.3}% 17
+\BOOKMARK [0][-]{chapter.4}{Aufbau des Sequencers}{}% 18
+\BOOKMARK [1][-]{section.4.1}{Caller Stack}{chapter.4}% 19
+\BOOKMARK [0][-]{chapter.5}{Test des Sequencer}{}% 20
+\BOOKMARK [1][-]{section.5.1}{section}{chapter.5}% 21
+\BOOKMARK [0][-]{chapter.6}{Fazit}{}% 22
+\BOOKMARK [1][-]{section.6.1}{section}{chapter.6}% 23

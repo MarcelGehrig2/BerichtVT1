@@ -4,6 +4,8 @@ The top-level auxiliary file: Bericht.aux
 A level-1 auxiliary file: Einleitung.aux
 A level-1 auxiliary file: EEROSAktuellerStand.aux
 A level-1 auxiliary file: AnforderungenAnSequencer.aux
+A level-1 auxiliary file: DokumentationFuerSteuerungsentwickler.aux
+A level-1 auxiliary file: DokumentationFuerApplikationsentwickler.aux
 A level-1 auxiliary file: SequencerAufbau.aux
 A level-1 auxiliary file: SequencerTest.aux
 A level-1 auxiliary file: Fazit.aux
@@ -12,7 +14,7 @@ I found no \bibdata command---while reading file Bericht.aux
 I found no \bibstyle command---while reading file Bericht.aux
 You've used 0 entries,
             0 wiz_defined-function locations,
-            89 strings with 598 characters,
+            91 strings with 682 characters,
 and the built_in function-call counts, 0 in all, are:
 = -- 0
 > -- 0
