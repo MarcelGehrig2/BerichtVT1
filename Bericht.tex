@@ -9,7 +9,7 @@
 \begin{document}
 	\renewcommand{\thepage}{\roman{page}}
 	\renewcommand{\bibname}{Quellenverzeichnis}
-%	\include{Titelseite}
+	\include{Titelseite}
 %	\newpage
 %	\include{Zusammenfassung}
 	\newpage
@@ -17,6 +17,7 @@
 	\addtocontents{toc}{\protect\thispagestyle{scrheadings}}
 	\renewcommand{\tableofcontents}{\section*{\contentsname} \pagestyle{scrheadings} \@starttoc{toc}}
 	\makeatother
+	\setcounter{tocdepth}{1}		%"Tiefe" des Inhaltsverzeichnis
 	\tableofcontents
 	\newpage
 	\renewcommand{\thepage}{\arabic{page}}
@@ -39,7 +40,7 @@
 %	\include{Elektronik_ComCape}	
 %	
 %	\include{Glossar}
-%	\include{Quellen}
+	\include{Quellen}
 
 
 
@@ -58,7 +59,7 @@
 	{\setcounter{secnumdepth}{3}%
 	\addtocontents{toc}{\protect\setcounter{tocdepth}{3}\ignorespaces}}
 
-	\begin{nosectionintoc}
+	\begin{nosectionintoc}	%taucht nicht im Inhaltsverzeichnis auf
 		\makeatletter
 		\@addtoreset{figure}{section}
 		\@addtoreset{table}{section}
@@ -71,15 +72,9 @@
 	    \renewcommand{\section}[1]{\oldsection{#1}\resetpage}
 
 %		\input{Anhang_fachmodulbericht}
-%		\input{Anhang_Elektronik}
+		\input{Anhang}
 		
 		
-		
-%%		\input{Anhang_Software}
-%%		\input{Anhang_Mechanik}
-%%		\input{Anhang_FM_Bericht}
-%%		\input{Anhang_Sonstiges}
-%%		\input{Anhang_Pflichtenheft}
 %
 	\end{nosectionintoc}
 

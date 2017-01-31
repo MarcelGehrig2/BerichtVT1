@@ -6,7 +6,7 @@
 \section{Aktuelle Implementierung des Sequencers}
 Für EEROS besteht bereist ein rudimentärer \textit{Sequencer}.
 Im folgenden Kapitel wird die bestehende Implementierung kurz erklärt.
-In der Onlinedokumentation\footnote{http://wiki.eeros.org/eeros\_architecture/sequencer/start} wird noch vertiefter in die Details des bestehenden \textit{Sequencers} eingegangen, als in dieser Arbeit.
+In der Onlinedokumentation \cite{eerosOrg} wird noch vertiefter in die Details des bestehenden \textit{Sequencers} eingegangen, als in dieser Arbeit.
 
 
 \subsection{Sequencer}
@@ -17,7 +17,7 @@ Wenn mehrere parallele \textit{Sequences} aufgerufen werden sollen, muss für je
 \begin{figure}[!ht]
 \centering
 \includegraphics[angle=0,height=8cm]{images/SequencerBestehend.png}
-\caption{Schematische Darstellung des bestehenden Sequencers \protect\footnote{http://wiki.eeros.org/eeros\_architecture/sequencer/start}}
+\caption{Schematische Darstellung des bestehenden Sequencers \cite{eerosWiki}}
 \label{sequencerBestehend}
 \end{figure}
 
@@ -28,7 +28,7 @@ Als nächstes wird eine \textit{preCondition} überprüft.
 Fehlt die Überprüfung fehl, wird die \textit{Sequence} abgebrochen.
 Bei einem positiven Ergebnis wird der Hauptteil, eine Abfolge von definierten \textit{Steps} ausgeführt.
 Dem letzten \textit{Step} folgt noch eine Überprüfung einer \textit{postCondition}.
-Läuft der \textit{Sequencer} im \textit{stepping-mode}, wird die \textit{Sequence} bei jeden \textit{yield()} pausiert und wird erst fortgeführt, wenn der Befehl dazu gegeben wird.\footnote{http://wiki.eeros.org/eeros\_architecture/sequencer/start}
+Läuft der \textit{Sequencer} im \textit{stepping-mode}, wird die \textit{Sequence} bei jeden \textit{yield()} pausiert und wird erst fortgeführt, wenn der Befehl dazu gegeben wird. \cite{eerosWiki}
 
 \begin{lstlisting}
 init();

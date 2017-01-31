@@ -1,0 +1,7 @@
+This is makeindex, version 2.15 [TeX Live 2015] (kpathsea + Thai support).
+Scanning style file ./Bericht.ist..............done (14 attributes redefined, 0 ignored).
+Scanning input file Bericht.glo....done (30 entries accepted, 0 rejected).
+Sorting entries....done (150 comparisons).
+Generating output file Bericht.gls....done (92 lines written, 0 warnings).
+Output written in Bericht.gls.
+Transcript written in Bericht.glg.
