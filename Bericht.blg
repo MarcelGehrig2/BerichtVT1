@@ -2,20 +2,14 @@ This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: Bericht.aux
 A level-1 auxiliary file: Titelseite.aux
-A level-1 auxiliary file: Einleitung.aux
-A level-1 auxiliary file: EEROSAktuellerStand.aux
 A level-1 auxiliary file: AnforderungenAnSequencer.aux
-A level-1 auxiliary file: DokumentationFuerSteuerungsentwickler.aux
-A level-1 auxiliary file: DokumentationFuerApplikationsentwickler.aux
-A level-1 auxiliary file: SequencerAufbau.aux
-A level-1 auxiliary file: SequencerTest.aux
-A level-1 auxiliary file: Fazit.aux
 A level-1 auxiliary file: Quellen.aux
+I found no \citation commands---while reading file Bericht.aux
 I found no \bibdata command---while reading file Bericht.aux
 I found no \bibstyle command---while reading file Bericht.aux
-You've used 2 entries,
+You've used 0 entries,
             0 wiz_defined-function locations,
-            97 strings with 741 characters,
+            86 strings with 541 characters,
 and the built_in function-call counts, 0 in all, are:
 = -- 0
 > -- 0
@@ -54,4 +48,4 @@ warning$ -- 0
 while$ -- 0
 width$ -- 0
 write$ -- 0
-(There were 2 error messages)
+(There were 3 error messages)

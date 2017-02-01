@@ -10,21 +10,22 @@ Im Kapitel \textit{Test Cases} werden verschiedene Fälle beschrieben die mit de
 
 \section{Ziele}
 \subsection{Einfaches Interface für den Applikationsentwickler}
-Mit dem bestehenden Sequencer sind vertiefte Programmierkenntnisse notwendig, um eine Sequenz zu erstellen, oder abzuändern.
+Mit dem bestehenden \textit{Sequencer} sind vertiefte Programmierkenntnisse notwendig, um eine Sequenz zu erstellen, oder abzuändern.
 Sequenzen sind nicht intuitiv verständlich.
 Es werden Kenntnisse vom \textit{Control System} und dem \textit{Safety System} benötigt, um einen neuen Ablauf für den Roboter schreiben zu können. %TODO Satz
-Zur Zeit werden Sequenzen von den Steuerungsentwickler geschrieben.
+Zurzeit werden Sequenzen von den Steuerungsentwickler geschrieben.
+
 Wenn der Roboter fertig entwickelt worden ist, soll er an einen Kunden übergeben werden können.
 Der Kunde, oder der Betreiber des Roboters, soll dann Änderungen im Ablauf des \textit{Sequencers} vornehmen können, ohne dass er vertiefte Kenntnisse von der Programmiersprache C++ oder von der inneren Funktionsweise des Roboters haben muss.
 Dafür ist es notwendig, dass der Steuerungsentwickler den Roboter so abstrahiert, dass die Sequenzen aus logischen und verständlichen Schritten bestehen.
 
 
 \subsection{Flexibel einsetzbar für verschiedenste Arten von Roboter}
-Auch wenn die Sequenzen möglichst einfach aufgebaut werden sollen, muss der \textit{Steuerungsentwickler} für alle möglichen arten von Robotern Sequenzen bauen können.
-Alle möglichen Arten von Roboter haben verschiedene Anforderungen.
+Auch wenn die Sequenzen möglichst einfach aufgebaut werden sollen, muss der \textit{Steuerungsentwickler} für alle möglichen Kategorien von Robotern Sequenzen bauen können.
+Verschiedene Arten von Roboter haben verschiedene Anforderungen.
 Das \textit{Control System} von einem Roboterarm mit sechs Freiheitsgraden unterscheidet sich stark von einer Fertigungsstrassen mit mehreren Förderbändern.
-Trotz diesen Unterschieden soll es möglich sein, für beide Arten von Robotern sinnvolle Sequenzen zu erstellen.
-Das bedeutet, dass der \textit{Steuerungsentwickler} möglichst viele Freiheiten behält, ohne dass er durch das \textit{Framework} unnötig begrenzt wird.
+Trotz diesen Unterschieden soll es möglich sein, für beide Kategorien von Robotern sinnvolle Sequenzen zu erstellen.
+Das bedeutet, dass der \textit{Steuerungsentwickler} möglichst viele Freiheiten beibehält, ohne dass er durch das \textit{Framework} unnötig begrenzt wird.
 %TODO ss missbraucht
 
 
@@ -34,7 +35,7 @@ Diese Funktion von blockierenden und parallel ausgeführten Sequenzen soll auch 
  
 
 \subsection{Exception Handling}
-Eine \textit{Exception} ist ein Ereigniss, dass nicht immer auftritt, aber auftreten kann.
+Eine \textit{Exception} ist ein Ereignis, dass nicht immer auftritt, aber auftreten kann.
 Zu solchen \textit{Exception}, oder Ausnahmen, gehören zum Beispiel:
 \begin{enumerate}
 \item Ein blockiertes Förderband
@@ -63,6 +64,7 @@ Alle anderen Aufgaben sollen vom \textit{Sequencer} oder vom \textit{Control Sys
 \subsection{Echtzeit}
 Das \textit{Control System} und das \textit{Safety System} laufen beide in einem Echtzeit-Task.
 Der \textit{Sequencer} soll aber bewusst nur mit normaler Priorität laufen und besitzt keine Echtzeit Fähigkeit.
+
 Da der \textit{Sequencer} keine Regelung berechnet, benötigt er keine Echtzeit Fähigkeit.
 Eine niedrigere Priorität als das \textit{Control System} und das \textit{Safety System} ist notwendig, dass die beiden Systeme nicht vom \textit{Sequencer} beeinträchtigt werden.
 
@@ -74,14 +76,14 @@ Die Pfadplanung ist nicht Teil des \textit{Sequencers}, da sie den Rahmen dieser
 
 \section{Test Cases}
 \subsection{Einleitung}
-Die Testfälle sind so aufgebaut, dass sie möglichst einfach  und elementar sind.
+Die Testfälle sind so aufgebaut, dass sie möglichst einfach und elementar sind.
 Jeder \textit{Test Case} beschreibt eine andere Anforderung oder Spezialfall an den \textit{Sequencer}.
 Alle in der Realität vorkommenden Situation sollte durch einen, oder einer Kombination von mehreren, \textit{Test Cases} beschrieben werden können.
 
 Eine Ausnahme dazu bildet \textit{Test Case 8}.
 In diesem Testfall wurden möglichst viele verschiedene Situationen vereint.
 
-Mit dem \textit{Sequencer} sollen alle Testfälle sauber und verwirklicht werden werden können.
+Mit dem \textit{Sequencer} sollen alle Testfälle sauber und elegant umgesetzt werden werden können.
 
 
 \subsection{Test Case 1: Achse einfach}
@@ -102,7 +104,7 @@ Mit dem \textit{Sequencer} sollen alle Testfälle sauber und verwirklicht werden
 
 \textbf{Herausforderungen}
 \begin{itemize}
-\item Der \textit{Sequencer} muss die Eingänge \textit{Taster links}, \textit{Taster rechts} und die beiden Enschalter permanent überwachen und auf eine Änderung reagieren.
+\item Der \textit{Sequencer} muss die Eingänge \textit{Taster links}, \textit{Taster rechts} und die beiden Endschalter permanent überwachen und auf eine Änderung reagieren.
 \end{itemize}
 
 
@@ -136,25 +138,26 @@ Mit dem \textit{Sequencer} sollen alle Testfälle sauber und verwirklicht werden
 \item Förderband Abholer: Transportiert ständig alle Pakete weg, welche vom \textit{Greifer Abholer} abgelegt werden
 \end{itemize}
 
-\textbf{Ablauf}
+\textbf{Ablauf (Siehe Abbildung \ref{Testcase03Picture}})
 \begin{enumerate}
 \item Der \textit{Greifer Zubringer} holt ein neues Paket vom \textit{Förderband Zubringer}
 \item Der \textit{Greifer Zubringer} bringt das Paket in Rendezvous-Position
 \item Der \textit{Greifer Abholer} übernimmt das Paket vom \textit{Greifer Zubringer} 
 \item Der \textit{Greifer Abholer} legt das Paket auf das \textit{Förderband Abholer}
+\item Die Sequenz beginnt wieder von Anfang an
 \end{enumerate}
 
 %\begin{figure}[!ht]
 \begin{figure}[]
 \centering
 \includegraphics[angle=0,height=10cm]{images/Testcase03.png}
-\caption{Ablaufdiagramm vom \textit{Test Case 3}}
+\caption{\textit{Test Case 3}: Ablaufdiagramm vom}
 \label{Testcase03Picture}
 \end{figure}
 
 \textbf{Herausforderungen}
 \begin{itemize}
-\item Synchronisation von zwei parallel laufenden Sequenzen
+\item Synchronisation von zwei parallellaufenden Sequenzen
 \item Kommunikation zwischen zwei Sequenzen
 \end{itemize}
 
@@ -197,7 +200,7 @@ Mit dem \textit{Sequencer} sollen alle Testfälle sauber und verwirklicht werden
 
 \textbf{Herausforderungen}
 \begin{itemize}
-\item Zwei parallel laufende Sequenzen müssen mit einem Taster pausiert werden können
+\item Zwei parallellaufende Sequenzen müssen mit einem Taster pausiert werden können
 \end{itemize}
 
 
@@ -221,7 +224,7 @@ Mit dem \textit{Sequencer} sollen alle Testfälle sauber und verwirklicht werden
 \begin{figure}[]
 \centering
 \includegraphics[angle=0]{images/Testcase06.png}
-\caption{Signalverlauf bei einem prellenden Schalter}
+\caption{\textit{Test Case 6}: Signalverlauf bei einem prellenden Schalter}
 \label{Testcase06Picture}
 \end{figure}
 
@@ -244,8 +247,22 @@ Mit dem \textit{Sequencer} sollen alle Testfälle sauber und verwirklicht werden
 
 
 \subsection{Test Case 8: Detailliertes Rendezvous}
-Dieser \textit{Test Case} basiert auf auf dem \textit{Test Case 3}.
+Dieser \textit{Test Case} basiert auf auf dem \textit{Test Case 3}, ist aber detaillierter ausgearbeitet.
+Im Anhang \ref{sec:anhang_test_case_8} ist das Ablaufdiagramm der Hauptsequenz \textit{Sequenz Rendezvous} und der blockierenden Subsequenz \textit{Sequenz PickUp} angehängt.
+Das Ziel von diesem \textit{Test Case} war es nicht einen realistischen Fall abzubilden.
+Viel mehr dient er dazu, möglichst viele Fälle und Situationen abzubilden, die in einer Sequenz vorkommen können.
 
-asdf \ref{sec:anhang_test_case_8}
+%TODO grundlage für diskus
 
-asdf \ref{TestCase8Sequence1Picture}
+Das Ablaufdiagramm besteht aus folgenden Blöcken:
+\begin{itemize}
+\item Rechtecke: einzelne Steps
+\item Rechtecke mit doppelten, vertikalen Linien: Blockierende Subsequenzen
+\item Blaue Rauten: Entscheidungen
+\item Grüne Rauten: Blockierungen, bis Entscheidung wahr wird
+\item Parallelogramm: Statusvariable wird geändert
+\item Lange senkrechte Rechtecke: Bedingung, welche über längere Zeit überwacht wird
+\end{itemize}
+
+
+
