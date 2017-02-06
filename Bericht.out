@@ -1,26 +1,56 @@
-\BOOKMARK [0][-]{chapter.1}{Anforderungen an den Sequencer}{}% 1
-\BOOKMARK [1][-]{section.1.1}{Formulierung der Anforderungen}{chapter.1}% 2
-\BOOKMARK [1][-]{section.1.2}{Ziele}{chapter.1}% 3
-\BOOKMARK [2][-]{subsection.1.2.1}{Einfaches Interface f\374r den Applikationsentwickler}{section.1.2}% 4
-\BOOKMARK [2][-]{subsection.1.2.2}{Flexibel einsetzbar f\374r verschiedenste Arten von Roboter}{section.1.2}% 5
-\BOOKMARK [2][-]{subsection.1.2.3}{Parallele und blockierende Sequenzen}{section.1.2}% 6
-\BOOKMARK [2][-]{subsection.1.2.4}{Exception Handling}{section.1.2}% 7
-\BOOKMARK [2][-]{subsection.1.2.5}{Zugriff auf Control System}{section.1.2}% 8
-\BOOKMARK [2][-]{subsection.1.2.6}{Safety System entlasten}{section.1.2}% 9
-\BOOKMARK [1][-]{section.1.3}{Nicht Ziele}{chapter.1}% 10
-\BOOKMARK [2][-]{subsection.1.3.1}{Echtzeit}{section.1.3}% 11
-\BOOKMARK [2][-]{subsection.1.3.2}{Pfadplanung}{section.1.3}% 12
-\BOOKMARK [1][-]{section.1.4}{Test Cases}{chapter.1}% 13
-\BOOKMARK [2][-]{subsection.1.4.1}{Einleitung}{section.1.4}% 14
-\BOOKMARK [2][-]{subsection.1.4.2}{Test Case 1: Achse einfach}{section.1.4}% 15
-\BOOKMARK [2][-]{subsection.1.4.3}{Test Case 2: EEDURO Delta Roboter Maus}{section.1.4}% 16
-\BOOKMARK [2][-]{subsection.1.4.4}{Test Case 3: Rendezvous}{section.1.4}% 17
-\BOOKMARK [2][-]{subsection.1.4.5}{Test Case 4: Sequenz pausieren}{section.1.4}% 18
-\BOOKMARK [2][-]{subsection.1.4.6}{Test Case 5: Zwei Roboterarme}{section.1.4}% 19
-\BOOKMARK [2][-]{subsection.1.4.7}{Test Case 6: Prellender Taster}{section.1.4}% 20
-\BOOKMARK [2][-]{subsection.1.4.8}{Test Case 7: Men\374}{section.1.4}% 21
-\BOOKMARK [2][-]{subsection.1.4.9}{Test Case 8: Detailliertes Rendezvous}{section.1.4}% 22
-\BOOKMARK [0][-]{chapter*.2}{Quellenverzeichnis}{}% 23
-\BOOKMARK [1][-]{section.Alph0.1}{Test Case 8}{chapter*.2}% 24
-\BOOKMARK [2][-]{subsection.Alph0.1.1}{Sequenz Rendezvous}{section.Alph0.1}% 25
-\BOOKMARK [2][-]{subsection.Alph0.1.2}{Sequenz PickUp}{section.Alph0.1}% 26
+\BOOKMARK [0][-]{chapter.1}{Einleitung}{}% 1
+\BOOKMARK [1][-]{section.1.1}{Vorwort}{chapter.1}% 2
+\BOOKMARK [1][-]{section.1.2}{EEROS}{chapter.1}% 3
+\BOOKMARK [1][-]{section.1.3}{Klarstellung der Benennungen}{chapter.1}% 4
+\BOOKMARK [1][-]{section.1.4}{Aufgabenstellung}{chapter.1}% 5
+\BOOKMARK [0][-]{chapter.2}{EEROS aktueller Stand}{}% 6
+\BOOKMARK [1][-]{section.2.1}{EEROS generell}{chapter.2}% 7
+\BOOKMARK [1][-]{section.2.2}{Aktuelle Implementierung des Sequencers}{chapter.2}% 8
+\BOOKMARK [2][-]{subsection.2.2.1}{Sequencer}{section.2.2}% 9
+\BOOKMARK [2][-]{subsection.2.2.2}{Sequence}{section.2.2}% 10
+\BOOKMARK [2][-]{subsection.2.2.3}{Step}{section.2.2}% 11
+\BOOKMARK [2][-]{subsection.2.2.4}{Sub-Sequence}{section.2.2}% 12
+\BOOKMARK [2][-]{subsection.2.2.5}{Error-Handler}{section.2.2}% 13
+\BOOKMARK [1][-]{section.2.3}{Fallbeispiel 'EEDURO Delta Roboter'}{chapter.2}% 14
+\BOOKMARK [2][-]{subsection.2.3.1}{asdf}{section.2.3}% 15
+\BOOKMARK [0][-]{chapter.3}{Anforderungen an den Sequencer}{}% 16
+\BOOKMARK [1][-]{section.3.1}{Formulierung der Anforderungen}{chapter.3}% 17
+\BOOKMARK [1][-]{section.3.2}{Ziele}{chapter.3}% 18
+\BOOKMARK [2][-]{subsection.3.2.1}{Einfaches Interface f\374r den Applikationsentwickler}{section.3.2}% 19
+\BOOKMARK [2][-]{subsection.3.2.2}{Flexibel einsetzbar f\374r verschiedenste Arten von Roboter}{section.3.2}% 20
+\BOOKMARK [2][-]{subsection.3.2.3}{Parallele und blockierende Sequenzen}{section.3.2}% 21
+\BOOKMARK [2][-]{subsection.3.2.4}{Exception Handling}{section.3.2}% 22
+\BOOKMARK [2][-]{subsection.3.2.5}{Zugriff auf Control System}{section.3.2}% 23
+\BOOKMARK [2][-]{subsection.3.2.6}{Safety System entlasten}{section.3.2}% 24
+\BOOKMARK [1][-]{section.3.3}{Nicht Ziele}{chapter.3}% 25
+\BOOKMARK [2][-]{subsection.3.3.1}{Echtzeit}{section.3.3}% 26
+\BOOKMARK [2][-]{subsection.3.3.2}{Pfadplanung}{section.3.3}% 27
+\BOOKMARK [1][-]{section.3.4}{Test Cases}{chapter.3}% 28
+\BOOKMARK [2][-]{subsection.3.4.1}{Einleitung}{section.3.4}% 29
+\BOOKMARK [2][-]{subsection.3.4.2}{Test Case 1: Achse einfach}{section.3.4}% 30
+\BOOKMARK [2][-]{subsection.3.4.3}{Test Case 2: EEDURO Delta Roboter Maus}{section.3.4}% 31
+\BOOKMARK [2][-]{subsection.3.4.4}{Test Case 3: Rendezvous}{section.3.4}% 32
+\BOOKMARK [2][-]{subsection.3.4.5}{Test Case 4: Sequenz pausieren}{section.3.4}% 33
+\BOOKMARK [2][-]{subsection.3.4.6}{Test Case 5: Zwei Roboterarme}{section.3.4}% 34
+\BOOKMARK [2][-]{subsection.3.4.7}{Test Case 6: Prellender Taster}{section.3.4}% 35
+\BOOKMARK [2][-]{subsection.3.4.8}{Test Case 7: Men\374}{section.3.4}% 36
+\BOOKMARK [2][-]{subsection.3.4.9}{Test Case 8: Detailliertes Rendezvous}{section.3.4}% 37
+\BOOKMARK [0][-]{chapter.4}{Aufbau des Sequencers}{}% 38
+\BOOKMARK [1][-]{section.4.1}{Sequencer}{chapter.4}% 39
+\BOOKMARK [1][-]{section.4.2}{Grunds\344tzlicher Ablauf}{chapter.4}% 40
+\BOOKMARK [1][-]{section.4.3}{Base Sequence}{chapter.4}% 41
+\BOOKMARK [2][-]{subsection.4.3.1}{Membervariablen}{section.4.3}% 42
+\BOOKMARK [2][-]{subsection.4.3.2}{Virtuelle Methoden}{section.4.3}% 43
+\BOOKMARK [2][-]{subsection.4.3.3}{Sonstige Methoden}{section.4.3}% 44
+\BOOKMARK [1][-]{section.4.4}{Sequence}{chapter.4}% 45
+\BOOKMARK [1][-]{section.4.5}{Step}{chapter.4}% 46
+\BOOKMARK [1][-]{section.4.6}{Condition}{chapter.4}% 47
+\BOOKMARK [1][-]{section.4.7}{Monitor}{chapter.4}% 48
+\BOOKMARK [2][-]{subsection.4.7.1}{Condition}{section.4.7}% 49
+\BOOKMARK [2][-]{subsection.4.7.2}{Exception Sequence}{section.4.7}% 50
+\BOOKMARK [2][-]{subsection.4.7.3}{Behavior}{section.4.7}% 51
+\BOOKMARK [2][-]{subsection.4.7.4}{Timeout Monitor}{section.4.7}% 52
+\BOOKMARK [0][-]{chapter*.2}{Quellenverzeichnis}{}% 53
+\BOOKMARK [1][-]{section.Alph0.1}{Test Case 8}{chapter*.2}% 54
+\BOOKMARK [2][-]{subsection.Alph0.1.1}{Sequenz Rendezvous}{section.Alph0.1}% 55
+\BOOKMARK [2][-]{subsection.Alph0.1.2}{Sequenz PickUp}{section.Alph0.1}% 56
