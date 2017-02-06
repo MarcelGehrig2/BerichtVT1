@@ -9,9 +9,12 @@
 \begin{document}
 	\renewcommand{\thepage}{\roman{page}}
 	\renewcommand{\bibname}{Quellenverzeichnis}
-	\include{Titelseite}
+	
+	%TODO abstract
+	%\include{Titelseite}
+	
 %	\newpage
-%	\include{Zusammenfassung}
+	\include{Zusammenfassung}
 	\newpage
 	\makeatletter
 	\addtocontents{toc}{\protect\thispagestyle{scrheadings}}
@@ -23,23 +26,25 @@
 	\renewcommand{\thepage}{\arabic{page}}
 	\setcounter{page}{1}
 	
-%	\include{EinleitungVorlage}
+%%	\include{EinleitungVorlage}
+	
+	
 	
 	\include{Einleitung}
 	\include{EEROSAktuellerStand}
 	\include{AnforderungenAnSequencer}
-%	\include{DokumentationFuerSteuerungsentwickler}
-%	\include{DokumentationFuerApplikationsentwickler}
+	
+	\include{DokumentationFuerSteuerungsentwickler}
+	%\include{DokumentationFuerApplikationsentwickler}
 	\include{SequencerAufbau} %innerer Aufbau
-%	\include{SequencerTest}
-%	\include{Fazit}
+	%\include{SequencerTest}
+	\include{Fazit}
 	
 	
-%	\include{Loesungsansaetze_und_Varianten}
-%	\include{Elektronik_BBB}
-%	\include{Elektronik_ComCape}	
-%	
-%	\include{Glossar}
+	
+%%	\include{Glossar}
+
+
 	\include{Quellen}
 
 
@@ -71,7 +76,7 @@
 	    \def\resetpage{\setcounter{page}{1}}
 	    \renewcommand{\section}[1]{\oldsection{#1}\resetpage}
 
-%		\input{Anhang_fachmodulbericht}
+
 		\input{Anhang}
 		
 		

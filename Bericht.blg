@@ -1,17 +1,19 @@
 This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: Bericht.aux
-A level-1 auxiliary file: Titelseite.aux
+A level-1 auxiliary file: Zusammenfassung.aux
 A level-1 auxiliary file: Einleitung.aux
 A level-1 auxiliary file: EEROSAktuellerStand.aux
 A level-1 auxiliary file: AnforderungenAnSequencer.aux
+A level-1 auxiliary file: DokumentationFuerSteuerungsentwickler.aux
 A level-1 auxiliary file: SequencerAufbau.aux
+A level-1 auxiliary file: Fazit.aux
 A level-1 auxiliary file: Quellen.aux
 I found no \bibdata command---while reading file Bericht.aux
 I found no \bibstyle command---while reading file Bericht.aux
 You've used 2 entries,
             0 wiz_defined-function locations,
-            93 strings with 631 characters,
+            95 strings with 686 characters,
 and the built_in function-call counts, 0 in all, are:
 = -- 0
 > -- 0
