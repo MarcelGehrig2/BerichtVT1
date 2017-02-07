@@ -1,7 +1,7 @@
 \chapter{Dokumentation für Steuerungsentwickler}
 Dieses Kapitel ermöglicht einen leichten Einstig in den neuen Sequencer.
 Es deckt aber nicht vollständig alle Details von allen Funktionen des Sequencer ab.
-Eine detailliertere Beschreibung des Sequencers und von dessen Funktionen findet sich im Kapitel \ref{sequencerAufbau}.
+Eine detailliertere Beschreibung des \textit{Sequencers} und von dessen Funktionen findet sich im Kapitel \ref{sequencerAufbau}.
 
 
 \section{Den Sequencer erstellen}
@@ -13,26 +13,35 @@ Alle anderen Sequenzen werden von der Hauptsequenz aus gestartet.
 \begin{lstlisting}
 #include "sequences/MainSequence.hpp"
 
+...
+
 eeros::sequencer::Sequencer S;
 MainSequence mainSequence(S, &controlSystem, "mainSequence");
 S.addMainSequence(&mainSequence);
 
 executor.run();
 mainSequence.join();	//The application only stops, when the mainSequence is finished
+
+...
 \end{lstlisting}
 
 
-\section{Benutzerdefinierte Sequenz}
-\subsection{Eigenschaften von Sequenzen}
-Sequenzen werden standardmässig nicht-blockierend gestartet.
-Es besteht aber auch die Möglichkeit, Sequenzen blockierend zu starten.
+\section{Benutzerdefinierte Klassen}
+Der Kern des neuen \textit{Sequencers} sind benutzerdefinierte Klassen, welche von vordefinierten EEROS-Klassen abgeleitet werden.
+Dieses System erlaubt dem \textit{Steuerungsentwickler} die spezifische Implementierung von Funktionen hinter Klassen mit sinnvollen Namen zu verstecken.
 
+Weil die Implementierung in den benutzerdefinierten Klassen versteckt wird, können einfach verständliche Sequenzen aufgebaut werden
 
-\subsection{Vorteile von benutzerdefinierten Sequenzen}
+Die wichtigsten EEROS-Klassen für diesen Zweck sind:
+\begin{itemize}
+\item Sequence
+\item Step
+\item Condition
+\end{itemize}
 
+In den folgenden Kapitel wird mit Hilfe von einem Pseudo-System demonstriert, wie diese Klassen verwendet werden können.
 
-
-\subsection{Beispiel für eine mainSequence}
+\section{Beispiel für eine mainSequence}
 
 \textit{MainSequence.hpp:}\
 \begin{lstlisting}
@@ -67,8 +76,7 @@ Jede Sequenz muss von der Klasse \textit{eeros::sequencer::Sequence} abgeleitet 
 \textbf{Zeile 7} und \textbf{Zeile 22} sind notwendig, um einen Pointer auf das \textit{ControlSystem} zu erhalten.
 Dafür muss zusätzlich der \textit{Constructor} angepasst werden.
 
-\textit{int action();} ist die wichtigste Methode der Sequenz.
-Sie beinhaltet den Ablauf der Sequenz.
+\textit{int action();} ist die wichtigste Methode, denn sie beinhaltet den Ablauf der Sequenz.
 
 \textbf{Zeile 15} bis \textbf{Zeile 20} beschreiben benutzerdefiniert Sequenzen, die von der Hauptsequenz aus gestartet werden.
 
@@ -117,6 +125,8 @@ int MainSequence::action()
 
 In \textbf{Zeile 9} wird die Basis-Sequenz und der Pointer für das \textit{ControlSystem} initialisiert.
 Zusätzlich müssen auch alle Sequenzen, die in dieser Sequenz genutzt werden, initialisiert werden.
+Die ersten drei Parameter sind dabei immer gleich.
+Der vierte Parameter ist der Namen der Sequenz.
 
 \textbf{Zeile 17} definiert diese Sequenz als nicht-blockierend.
 Die Hauptsequenz von einer Applikation muss immer nicht-blockierend sein.
@@ -125,18 +135,19 @@ Andere Sequenzen können blockierend sein.
 Die \textbf{Zeile 19} aktiviert für die Sequenz \textit{seqA1} den Timeout und setzt die Zeit auf 5.1 Sekunden.
 Wenn \textit{seqA1} nach 5.1 Sekunden Laufzeit noch nicht fertig abgearbeitet wurde, wird \textit{seqEA1} ausgeführt.
 Nachdem die Exception-Sequenz \textit{seqEA1} beendet wurde, wird \textit{seqA1} neu gestartet, da dieses Verhalten in \textbf{Zeile 21} definiert wurde.
+Mehr Informationen zum Verhalten findet sich im Kapitel \ref{monitorUndCondition}.
 
 Durch den Befehl in \textbf{Zeile 23} wird \textit{seqA1}, unabhängig vom vordefinierten Standard von \textit{SequenceA}, blockierend ausgeführt.
 
 In der Methode \textit{action()} wird der eigentliche Ablauf von der Sequenz definiert.
 Als erstes wird \textit{seqB1} gestartet.
-Da sie, und auch \textit{seqB2}, nicht-blockierend sind, wird sofort auch \textit{seqB2} und \textit{seqA1} gestartet.
+Da diese, und auch \textit{seqB2}, nicht-blockierend sind, wird sofort auch \textit{seqB2} und \textit{seqA1} gestartet.
 Weil \textit{seqA1} den weiteren Ablauf blockiert, bis sie fertig gestellt wurde, wird \textit{seqB3} erst ausgeführt, wenn \textit{seqA1} beendet wurde.
 
 Mit den \textit{join()}-Befehlen kann sichergestellt werden, dass die Hauptsequenz erst dann beendet wird, wenn die entsprechenden, parallel laufenden Sequenzen fertig abgearbeitet wurden.
 
 
-\subsection{Beispiel für eine benutzerdefinierte Sequenz 'SequenceA'}
+\section{Beispiel für eine benutzerdefinierte Sequenz 'SequenceA'}
 
 \textit{SequenceA.hpp:}\
 \begin{lstlisting}
@@ -175,7 +186,7 @@ Je nach Bedarf können die Typen und Anzahl der Parameter frei gewählt werden, 
 \textit{SequenceA.cpp:}\
 \begin{lstlisting}
 #include "SequenceA.hpp"
-#include "../steps/StepA.hpp"
+#include "../steps/GoTo.hpp"
 
 using namespace testappsequencer;
 
@@ -200,10 +211,10 @@ int SequenceA::operator()(int a, int b)
 int SequenceA::action()
 {
 	//initialisation of the step 'goTo'
-	GoTo goTo = StepA(S, CS, this);
-	sA.setTimeoutTime(5);
- 	sA.setTimeoutBehavior(abortOwner);
-	sA.setTimeoutExceptionSequence(&seqEA2);
+	GoTo goTo = GoTo(S, CS, this);
+	goTo.setTimeoutTime(5);
+ 	goTo.setTimeoutBehavior(abortOwner);
+	goTo.setTimeoutExceptionSequence(&seqEA2);
 	
 	//start of the sequence
 	goTo(0);
@@ -214,7 +225,7 @@ int SequenceA::action()
 \end{lstlisting}
 
 Mit dem Befehl \textit{setIsBlocking()} im Konstruktor werden standardmässig alle Sequenzen von der Klasse \textit{SequenceA} blockierend ausgeführt.
-Der Befehl \textit{seqA1.setIsBlocking();} aus \textit{MainSequence.cpp} wäre somit gar nicht notwendig.
+Der Befehl \textit{seqA1.setIsBlocking();} aus \textit{MainSequence.cpp} ist somit nicht notwendig.
 
 Es ist zwingen notwendig, dass die Methode \textit{operator()} implementiert wird.
 Ebenfalls erforderlich ist, dass der letzte Befehl von dieser Methode \textit{return Sequence::start();}  lautet.
@@ -227,7 +238,7 @@ Da \textit{Steps} keinen eigenen Thread starten, brauchen sie weniger Ressourcen
 
 
 
-\subsection{Beispiel für einen benutzerdefinierten Step 'GoTo'}
+\section{Beispiel für einen benutzerdefinierten Step 'GoTo'}
 
 \textit{GoTo.hpp:}\
 \begin{lstlisting}
@@ -243,14 +254,190 @@ namespace testappsequencer {
 	public:
 		GoTo(Sequencer& S, TestAppCS* CS, BaseSequence* caller);
 		
-		int operator()(int a, int b);
+		int operator()(int position);
 		int action();
 		bool checkExitCondition();
 		
+		int pos;
 		TestAppCS* CS;
 	};
-
-	
-	
 };
 \end{lstlisting}
+
+Das Interface zu einem \textit{Step} ist gleich wie bei einer Sequenz.
+Neu ist hier die Methode \textit{checkExitCondition()}, welche aber auch bei Sequenzen implementiert werden kann.
+Der \textit{Step} wird erst beendet, wenn \textit{checkExitCondition()} ein \textit{true} zurück gibt.
+
+
+\textit{GoTo.cpp:}\
+\begin{lstlisting}
+#include "GoTo.hpp"
+#include "../control/TestAppCS.hpp"
+#include <eeros/sequencer/Sequencer.hpp>
+
+using namespace testappsequencer;
+
+
+GoTo::GoTo(Sequencer& S, TestAppCS* CS, BaseSequence* caller)
+: Step(S, caller), CS(CS)
+{
+	
+}
+
+
+int GoTo::operator()(int position)
+{
+	pos = position;
+	return Step::start();	//this code is mandatory for every derived Step- and Sequence-Class
+}
+
+
+int GoTo::action()
+{	
+ 	CS->pathPlaner.setTarget(position);
+}
+
+
+bool GoTo::checkExitCondition()
+{
+	int actPos = CS->pathPlaner.getActPos;
+	if ( abs(actPos - pos) > 10 ) return false;	//target position not yet reached
+	
+	SequenceB* seqB1 = (SequenceB*)(S.getSeqenceByName("seqB1"));
+	seqB1->setLastReachedPosition(actPos);
+	
+	return true;
+}
+\end{lstlisting}
+
+Die \textit{action()}-Methode hat in diesem Fall nur eine einfache Anweisung an das \textit{ControlSystem}.
+Diese Methode darf nie, weder bei \textit{Steps} noch bei Sequenzen, blockierend sein.
+
+Weil \textit{checkExitCondition()} in dieser Klasse überschrieben wurde, beendet der \textit{GoTo-Step} erst, wenn die Position erreicht wurde.
+Im \textit{SequenceA.cpp} wurde aber noch der Timeout aktiviert.
+Das bedeutet, dass \textit{seqEA2} gestartet wird, wenn die Zielposition nicht innerhalb von 5 Sekunden erreicht wird.
+
+In Zeile \textbf{33} wird demonstriert, wie ein Pointer auf eine parallel laufende Sequenz geholt werden kann.
+Der \textit{Typecast} ist notwendig, dass die für die Klasse \textit{SequenceB} spezifische Methode \textit{setLastReachedPosition(int pos)} (diese Methode wird in dieser Arbeit nicht definiert) verwendet werden kann.
+
+
+
+\section{Beispiel für einen benutzerdefinierten Monitor und Condition}
+\label{monitorUndCondition}
+Wenn ein Zustand eines Roboters überwacht werden soll, dann sind die Klassen \textit{Monitor} und \textit{Condition} nützliche Werkzeuge.
+Eine \textit{Condition} überprüft eine oder mehrere zusammenhängende Zustände des Roboters.
+In unserem Beispiel wollen wir überprüfen, ob der Roboter blockiert ist.
+Dazu erstellen wir folgende Condition:
+
+\textit{IsBlocked.hpp:}\
+\begin{lstlisting}
+namespace testappsequencer {
+	
+	using namespace eeros::sequencer;
+	
+	class  TestAppCS;
+	
+	class IsBlocked : public Condition {
+	public:
+		ConditionTimeout(Sequencer& S, TestAppCS* CS);
+		
+		bool validate();
+		
+		int lastActPos;
+		TestAppCS* CS;
+	};
+};		
+\end{lstlisting}
+
+Die Methode \textit{bool validate();} muss bei jeder \textit{Condition} überschrieben werden.
+
+
+\textit{IsBlocked.cpp:}\
+\begin{lstlisting}
+#include <IsBlocked.hpp>
+
+using namespace eeros;
+using namespace eeros::sequencer;
+
+IsBlocked::IsBlocked(Sequencer& S, TestAppCS* CS)
+: Condition(seq), CS(CS)
+{ }
+
+bool IsBlocked::validate()
+{
+	int actPos = CS->pathPlaner.getActPos();
+	if( abs(actPos - CS->pathPlaner.getSetPos()) > 10 ) {	//target position not yet reached
+		if( abs(actPos - lastActPos) <= 1 ) return true;	//roboter is blocked
+	}
+	lastActPos = actPos;	
+	return false;
+}
+\end{lstlisting}
+
+Mit der \textit{Condition IsBlocked} kann jetzt einfach überprüft werden, ob der Roboter blockiert ist.
+
+Mit einem \textit{Monitor} können wir diese Überprüfung automatisieren.
+Mit dem \textit{Monitor} lässt auch einfach festlegen, was passieren soll, wenn der Roboter blockiert.
+Das Prinzip ist das gleiche wie bei einem Timeout.
+
+Dafür ergänzen wir \textit{MainSequence.hpp} und \textit{MainSequence.cpp}.
+
+\textit{MainSequence.hpp:}\
+\begin{lstlisting}
+...
+
+#include "SequenceExceptionA.hpp"
+#include "IsBlocked.hpp"
+#include <eeros/sequencer/Monitor.hpp>
+
+...
+		IsBlocked isBlockedCondition;
+		Moinitor isBlockedMonitor;
+		
+		SequenceExceptionA seqEA1;
+		SequenceExceptionA seqEA1isBlocked;	//Exception sequence, if roboter is blocked
+		
+...
+\end{lstlisting}
+
+Die \textbf{Zeilen 4, 5, 8, 9} und \textbf{12} wurden hinzugefügt.
+
+\textit{MainSequence.cpp:}\
+\begin{lstlisting}
+...
+
+seqEA1(S, CS, this, "seqEA1"),						//Exception Sequence
+seqEA1isBlocked(S, CS, this, "seqEA1isBlockt"),		//Exception Sequence, if roboter is blocked
+isBlockedCondition(S, CS),
+isBlockedMonitor(this, &isBlockedCondition, repeteOwner, &seqEA1isBlocked)
+// isBlockedMonitor(this, &isBlockedCondition, restartOwner)	//Exception Sequence can be omitted
+{
+	setIsNonBlocking();
+	
+	seqA1.setTimeoutTime(5.1);
+	seqA1.setTimeoutExceptionSequence(&seqEA1);
+	seqA1.setTimeoutBehavior(restartOwner);
+	
+	seqA1.setIsBlocking();
+	
+	seqA1.addMonitor( &isBlockedMonitor );
+}
+
+...
+\end{lstlisting}
+
+Die \textbf{Zeilen 4, 5, 6} und \textbf{16} wurden hinzugefügt.
+
+Solange \textit{seqA1} läuft, wird mit der \textit{Condition IsBlocked} überprüft, ob der Roboter blockiert.
+Sobald der Roboter blockiert, wird die Sequenz \textit{seqEA1isBlockt} ausgeführt.
+Die Sequenz kann genutzt werden, um die Blockierung zu lösen.
+Nachdem die Exception Sequenz abgearbeitet wurde, wird \textit{seqA1}, wegen dem Verhalte \textit{restartOwner} wiederholt.
+
+Folgende Verhalten sind bei einer \textit{Exception} möglich:
+\begin{itemize}
+\item \textbf{nothing}: Die Sequenz wird ganz normal weitergeführt.
+\item \textbf{abortOwner}: Die Besitzer-Sequenz, hier \textit{seqA1}, wird abgebrochen.
+\item \textbf{restartOwner}: Die Besitzer-Sequenz wird abgebrochen und neu gestartet.
+\item \textbf{abortCallerofOwner}: Die \textit{callerSequence}, hier \textit{mainSequence}, wird abgebrochen.
+\item \textbf{restartCallerofOwner}: Die \textit{callerSequence} wird abgebrochen und neu gestartet.
+\end{itemize}
