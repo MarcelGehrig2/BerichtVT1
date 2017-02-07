@@ -1,5 +1,5 @@
 \chapter{Aufbau des Sequencers}
-
+\label{sequencerAufbau}
 \section{Sequencer}
 Das Sequencer-Objekt bildet die Basis für den ganzen \textit{Sequencer}.
 Für jede Applikation wird nur ein Sequencer Objekt erstellt.
@@ -222,7 +222,10 @@ Wird sie aber blockierend gestartet, dann wird die \textit{actionFramwork()}-Met
 \section{Step}
 Im Gegensatz zur \textit{Sequence} wird die Klasse \textit{Step} nur von der \textit{BaseSequence} und nicht von einem \textit{Thread} abgeleitet.
 
-Ein \textit{Step} erzeugt nie einen Thread und wird mit \textit{start()} immer blockierend gestarted.
+Ein \textit{Step} erzeugt nie einen Thread und wird mit \textit{start()} immer blockierend gestartet.
+
+Ein \textit{Step} hat keinen Namen und wird auch nicht im \textit{Sequencer} registriert.
+Andere \textit{Steps} oder Sequenzen können also nicht auf einen \textit{Step} zugreifen.
 
 
 

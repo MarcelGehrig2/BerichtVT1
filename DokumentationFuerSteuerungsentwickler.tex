@@ -1,0 +1,256 @@
+\chapter{Dokumentation für Steuerungsentwickler}
+Dieses Kapitel ermöglicht einen leichten Einstig in den neuen Sequencer.
+Es deckt aber nicht vollständig alle Details von allen Funktionen des Sequencer ab.
+Eine detailliertere Beschreibung des Sequencers und von dessen Funktionen findet sich im Kapitel \ref{sequencerAufbau}.
+
+
+\section{Den Sequencer erstellen}
+Im Hauptprogramm der Applikation muss der Sequenzer erst erstellt werden.
+Die Hauptsequenz, in diesem Beispiel \textit{mainSequence} genannt, wird in einem Thread gestartet, sobald sie dem Sequencer hinzugefügt wird.
+Alle anderen Sequenzen werden von der Hauptsequenz aus gestartet.
+
+\textit{main.cpp:}\
+\begin{lstlisting}
+#include "sequences/MainSequence.hpp"
+
+eeros::sequencer::Sequencer S;
+MainSequence mainSequence(S, &controlSystem, "mainSequence");
+S.addMainSequence(&mainSequence);
+
+executor.run();
+mainSequence.join();	//The application only stops, when the mainSequence is finished
+\end{lstlisting}
+
+
+\section{Benutzerdefinierte Sequenz}
+\subsection{Eigenschaften von Sequenzen}
+Sequenzen werden standardmässig nicht-blockierend gestartet.
+Es besteht aber auch die Möglichkeit, Sequenzen blockierend zu starten.
+
+
+\subsection{Vorteile von benutzerdefinierten Sequenzen}
+
+
+
+\subsection{Beispiel für eine mainSequence}
+
+\textit{MainSequence.hpp:}\
+\begin{lstlisting}
+#include "SequenceA.hpp"
+#include "SequenceB.hpp"
+#include "SequenceExceptionA.hpp"
+
+namespace testappsequencer {
+
+	class TestAppCS;
+	
+	class MainSequence : public eeros::sequencer::Sequence {
+	public:
+		MainSequence(Sequencer& S, TestAppCS* CS, std::__cxx11::string name);
+
+		int action();
+		
+		SequenceA seqA1;
+		SequenceB seqB1; 
+		SequenceB seqB2; 
+		SequenceB seqB3;
+		
+		SequenceExceptionA seqEA1;
+		
+		TestAppCS* CS;
+	};
+};
+\end{lstlisting}
+
+Jede Sequenz muss von der Klasse \textit{eeros::sequencer::Sequence} abgeleitet werden.
+
+\textbf{Zeile 7} und \textbf{Zeile 22} sind notwendig, um einen Pointer auf das \textit{ControlSystem} zu erhalten.
+Dafür muss zusätzlich der \textit{Constructor} angepasst werden.
+
+\textit{int action();} ist die wichtigste Methode der Sequenz.
+Sie beinhaltet den Ablauf der Sequenz.
+
+\textbf{Zeile 15} bis \textbf{Zeile 20} beschreiben benutzerdefiniert Sequenzen, die von der Hauptsequenz aus gestartet werden.
+
+
+\textit{MainSequence.cpp:}\
+\begin{lstlisting}
+#include "MainSequence.hpp"
+
+using namespace testappsequencer;
+using namespace eeros;
+using namespace eeros::sequencer;
+
+
+MainSequence::MainSequence(Sequencer& S, TestAppCS* CS, std::__cxx11::string name) :
+Sequence(S, name), CS(CS),
+
+seqA1(S, CS, this, "seqA1"),
+seqB1(S, CS, this, "seqB1"),
+seqB2(S, CS, this, "seqB2"),
+seqB3(S, CS, this, "seqB3"),
+seqEA1(S, CS, this, "seqEA1")		//Exception Sequence
+{
+	setIsNonBlocking();
+	
+	seqA1.setTimeoutTime(5.1);
+	seqA1.setTimeoutExceptionSequence(&seqEA1);
+	seqA1.setTimeoutBehavior(restartOwner);
+	
+	seqA1.setIsBlocking();
+}
+
+int MainSequence::action()
+{
+	seqB1();
+	seqB2();
+	seqA1(10, 3);
+	seqB3();
+	
+	seqB1.join();
+	seqB2.join();
+	seqB3.join();
+	
+	log.info() << "MainSequence ended";
+}
+\end{lstlisting}
+
+In \textbf{Zeile 9} wird die Basis-Sequenz und der Pointer für das \textit{ControlSystem} initialisiert.
+Zusätzlich müssen auch alle Sequenzen, die in dieser Sequenz genutzt werden, initialisiert werden.
+
+\textbf{Zeile 17} definiert diese Sequenz als nicht-blockierend.
+Die Hauptsequenz von einer Applikation muss immer nicht-blockierend sein.
+Andere Sequenzen können blockierend sein.
+
+Die \textbf{Zeile 19} aktiviert für die Sequenz \textit{seqA1} den Timeout und setzt die Zeit auf 5.1 Sekunden.
+Wenn \textit{seqA1} nach 5.1 Sekunden Laufzeit noch nicht fertig abgearbeitet wurde, wird \textit{seqEA1} ausgeführt.
+Nachdem die Exception-Sequenz \textit{seqEA1} beendet wurde, wird \textit{seqA1} neu gestartet, da dieses Verhalten in \textbf{Zeile 21} definiert wurde.
+
+Durch den Befehl in \textbf{Zeile 23} wird \textit{seqA1}, unabhängig vom vordefinierten Standard von \textit{SequenceA}, blockierend ausgeführt.
+
+In der Methode \textit{action()} wird der eigentliche Ablauf von der Sequenz definiert.
+Als erstes wird \textit{seqB1} gestartet.
+Da sie, und auch \textit{seqB2}, nicht-blockierend sind, wird sofort auch \textit{seqB2} und \textit{seqA1} gestartet.
+Weil \textit{seqA1} den weiteren Ablauf blockiert, bis sie fertig gestellt wurde, wird \textit{seqB3} erst ausgeführt, wenn \textit{seqA1} beendet wurde.
+
+Mit den \textit{join()}-Befehlen kann sichergestellt werden, dass die Hauptsequenz erst dann beendet wird, wenn die entsprechenden, parallel laufenden Sequenzen fertig abgearbeitet wurden.
+
+
+\subsection{Beispiel für eine benutzerdefinierte Sequenz 'SequenceA'}
+
+\textit{SequenceA.hpp:}\
+\begin{lstlisting}
+#include "SequenceExceptionA.hpp"
+
+namespace testappsequencer {
+	
+	using namespace eeros::sequencer;
+	
+	class TestAppCS;
+	
+	class SequenceA : public Sequence {
+	public:
+		SequenceA(Sequencer& S, TestAppCS* CS, BaseSequence* caller, std::__cxx11::string name);
+		
+		int operator()(int a, int b);
+		//int operator()(std::string str);
+		//int operator()();
+		int action();
+		
+		SequenceExceptionA seqEA2;
+		
+		TestAppCS* CS;
+		int posA;
+		int posB;
+	};
+};
+\end{lstlisting}
+
+Der Aufbau von dieser Sequenz ähnelt stark dem Aufbau von der Hauptsequenz.
+Der einzige Unterschied ist die Methode \textit{int operator()(int a, int b);}.
+Diese Methode wird aufgerufen, bevor die Sequenz gestartet wird und kann genutzt werden, um Parameter zu übergeben.
+Je nach Bedarf können die Typen und Anzahl der Parameter frei gewählt werden, oder mit \textit{int operator()();} ganz weggelassen werden.
+
+
+\textit{SequenceA.cpp:}\
+\begin{lstlisting}
+#include "SequenceA.hpp"
+#include "../steps/StepA.hpp"
+
+using namespace testappsequencer;
+
+
+SequenceA::SequenceA(Sequencer& S, TestAppCS* CS, BaseSequence* caller, std::__cxx11::string name)
+: Sequence(S, caller, name), CS(CS),
+
+seqEA2(S, CS, this, "seqEA2Step")
+{
+	setIsBlocking();
+}
+
+
+int SequenceA::operator()(int a, int b)
+{
+	posA = a;
+	posB = b;
+	return Sequence::start();	//this code is mandatory for every derived Step- and Sequence-Class
+}
+
+
+int SequenceA::action()
+{
+	//initialisation of the step 'goTo'
+	GoTo goTo = StepA(S, CS, this);
+	sA.setTimeoutTime(5);
+ 	sA.setTimeoutBehavior(abortOwner);
+	sA.setTimeoutExceptionSequence(&seqEA2);
+	
+	//start of the sequence
+	goTo(0);
+	goTo(posA);
+	goTo(posB);
+}
+
+\end{lstlisting}
+
+Mit dem Befehl \textit{setIsBlocking()} im Konstruktor werden standardmässig alle Sequenzen von der Klasse \textit{SequenceA} blockierend ausgeführt.
+Der Befehl \textit{seqA1.setIsBlocking();} aus \textit{MainSequence.cpp} wäre somit gar nicht notwendig.
+
+Es ist zwingen notwendig, dass die Methode \textit{operator()} implementiert wird.
+Ebenfalls erforderlich ist, dass der letzte Befehl von dieser Methode \textit{return Sequence::start();}  lautet.
+Wenn der Sequenz Parameter übergeben werden, dann können hier die Variablen gespeichert werden.
+
+Am Anfang der \textit{action()}-Methode wird ein neuer \textit{Step} initialisiert.
+\textit{Steps} verhalten sich sehr ähnlich wie Sequenzen.
+Sie können aber nur blockierend aufgerufen werden.
+Da \textit{Steps} keinen eigenen Thread starten, brauchen sie weniger Ressourcen und können einfach mehrmals hintereinander aufgerufen werden.
+
+
+
+\subsection{Beispiel für einen benutzerdefinierten Step 'GoTo'}
+
+\textit{GoTo.hpp:}\
+\begin{lstlisting}
+#include <eeros/sequencer/Step.hpp>
+
+namespace testappsequencer {
+	
+	using namespace eeros::sequencer;
+	
+	class  TestAppCS;
+	
+	class GoTo : public Step {
+	public:
+		GoTo(Sequencer& S, TestAppCS* CS, BaseSequence* caller);
+		
+		int operator()(int a, int b);
+		int action();
+		bool checkExitCondition();
+		
+		TestAppCS* CS;
+	};
+
+	
+	
+};
+\end{lstlisting}

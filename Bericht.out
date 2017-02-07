@@ -35,24 +35,34 @@
 \BOOKMARK [2][-]{subsection.3.4.7}{Test Case 6: Prellender Taster}{section.3.4}% 35
 \BOOKMARK [2][-]{subsection.3.4.8}{Test Case 7: Men\374}{section.3.4}% 36
 \BOOKMARK [2][-]{subsection.3.4.9}{Test Case 8: Detailliertes Rendezvous}{section.3.4}% 37
-\BOOKMARK [0][-]{chapter.4}{Aufbau des Sequencers}{}% 38
-\BOOKMARK [1][-]{section.4.1}{Sequencer}{chapter.4}% 39
-\BOOKMARK [1][-]{section.4.2}{Grunds\344tzlicher Ablauf}{chapter.4}% 40
-\BOOKMARK [1][-]{section.4.3}{Base Sequence}{chapter.4}% 41
-\BOOKMARK [2][-]{subsection.4.3.1}{Membervariablen}{section.4.3}% 42
-\BOOKMARK [2][-]{subsection.4.3.2}{Virtuelle Methoden}{section.4.3}% 43
-\BOOKMARK [2][-]{subsection.4.3.3}{Sonstige Methoden}{section.4.3}% 44
-\BOOKMARK [1][-]{section.4.4}{Sequence}{chapter.4}% 45
-\BOOKMARK [1][-]{section.4.5}{Step}{chapter.4}% 46
-\BOOKMARK [1][-]{section.4.6}{Condition}{chapter.4}% 47
-\BOOKMARK [1][-]{section.4.7}{Monitor}{chapter.4}% 48
-\BOOKMARK [2][-]{subsection.4.7.1}{Condition}{section.4.7}% 49
-\BOOKMARK [2][-]{subsection.4.7.2}{Exception Sequence}{section.4.7}% 50
-\BOOKMARK [2][-]{subsection.4.7.3}{Behavior}{section.4.7}% 51
-\BOOKMARK [2][-]{subsection.4.7.4}{Timeout Monitor}{section.4.7}% 52
-\BOOKMARK [0][-]{chapter.5}{Fazit}{}% 53
-\BOOKMARK [1][-]{section.5.1}{section}{chapter.5}% 54
-\BOOKMARK [0][-]{chapter*.4}{Quellenverzeichnis}{}% 55
-\BOOKMARK [1][-]{section.Alph0.1}{Test Case 8}{chapter*.4}% 56
-\BOOKMARK [2][-]{subsection.Alph0.1.1}{Sequenz Rendezvous}{section.Alph0.1}% 57
-\BOOKMARK [2][-]{subsection.Alph0.1.2}{Sequenz PickUp}{section.Alph0.1}% 58
+\BOOKMARK [0][-]{chapter.4}{Dokumentation f\374r Steuerungsentwickler}{}% 38
+\BOOKMARK [1][-]{section.4.1}{Den Sequencer erstellen}{chapter.4}% 39
+\BOOKMARK [1][-]{section.4.2}{Benutzerdefinierte Sequenz}{chapter.4}% 40
+\BOOKMARK [2][-]{subsection.4.2.1}{Eigenschaften von Sequenzen}{section.4.2}% 41
+\BOOKMARK [2][-]{subsection.4.2.2}{Vorteile von benutzerdefinierten Sequenzen}{section.4.2}% 42
+\BOOKMARK [2][-]{subsection.4.2.3}{Beispiel f\374r eine mainSequence}{section.4.2}% 43
+\BOOKMARK [2][-]{subsection.4.2.4}{Beispiel f\374r eine benutzerdefinierte Sequenz 'SequenceA'}{section.4.2}% 44
+\BOOKMARK [2][-]{subsection.4.2.5}{Beispiel f\374r einen benutzerdefinierten Step 'GoTo'}{section.4.2}% 45
+\BOOKMARK [0][-]{chapter.5}{Aufbau des Sequencers}{}% 46
+\BOOKMARK [1][-]{section.5.1}{Sequencer}{chapter.5}% 47
+\BOOKMARK [1][-]{section.5.2}{Grunds\344tzlicher Ablauf}{chapter.5}% 48
+\BOOKMARK [1][-]{section.5.3}{Base Sequence}{chapter.5}% 49
+\BOOKMARK [2][-]{subsection.5.3.1}{Membervariablen}{section.5.3}% 50
+\BOOKMARK [2][-]{subsection.5.3.2}{Virtuelle Methoden}{section.5.3}% 51
+\BOOKMARK [2][-]{subsection.5.3.3}{Sonstige Methoden}{section.5.3}% 52
+\BOOKMARK [1][-]{section.5.4}{Sequence}{chapter.5}% 53
+\BOOKMARK [1][-]{section.5.5}{Step}{chapter.5}% 54
+\BOOKMARK [1][-]{section.5.6}{Condition}{chapter.5}% 55
+\BOOKMARK [1][-]{section.5.7}{Monitor}{chapter.5}% 56
+\BOOKMARK [2][-]{subsection.5.7.1}{Condition}{section.5.7}% 57
+\BOOKMARK [2][-]{subsection.5.7.2}{Exception Sequence}{section.5.7}% 58
+\BOOKMARK [2][-]{subsection.5.7.3}{Behavior}{section.5.7}% 59
+\BOOKMARK [2][-]{subsection.5.7.4}{Timeout Monitor}{section.5.7}% 60
+\BOOKMARK [0][-]{chapter.6}{Fazit}{}% 61
+\BOOKMARK [1][-]{section.6.1}{Ergebnis}{chapter.6}% 62
+\BOOKMARK [1][-]{section.6.2}{Fazit}{chapter.6}% 63
+\BOOKMARK [1][-]{section.6.3}{Ausblick}{chapter.6}% 64
+\BOOKMARK [0][-]{chapter*.4}{Quellenverzeichnis}{}% 65
+\BOOKMARK [1][-]{section.Alph0.1}{Test Case 8}{chapter*.4}% 66
+\BOOKMARK [2][-]{subsection.Alph0.1.1}{Sequenz Rendezvous}{section.Alph0.1}% 67
+\BOOKMARK [2][-]{subsection.Alph0.1.2}{Sequenz PickUp}{section.Alph0.1}% 68
