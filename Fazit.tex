@@ -1,7 +1,42 @@
-\chapter{Fazit}
-
+\chapter{Ergebnis, Fazit und Ausblick}
 \section{Ergebnis}
+Der entwickelte Sequenzer löst viele Probleme des alten Sequenzer.
+Es ist nun möglich Sequenzen so zu bauen, dass sie auch für Nicht-Experten einfach verständlich sind.
+
+Die Klasse \textit{Condition} erlaubt es nun, komplexe zusammenhängende Zustände in einer Klasse zu Abstrahieren.
+Der \textit{Steuerungsentwickler} kann eine benutzerdefinierte Klasse ableiten, die der \textit{Applikationsentwickler} nutzen kann, ohne dass er die implementierte Funktionalität verstehen muss.
+Der selbe Vorteil besteht auch für \textit{Sequenzen} und \textit{Steps}.
+
+Mit den neuen \textit{Monitore} existiert eine einfache Möglichkeit, bestimmte Zustände permanent und automatisch zu überwachen.
+Die \textit{Monitore} können zusammen mit den \textit{Conditions} als Exception-Handler verwendet werden.
+
+Eine Synchronisation und Datenaustausch zwischen mehreren parallel laufenden Sequenzen ist einfach möglich, da jetzt nur noch der Namen der gesuchten Sequenz bekannt sein muss, um einen Pointer auf die Sequenz zu erhalten.
+
 
 \section{Fazit}	%subjektiv
+Ich habe sehr viel Zeit für den Pseudo-Sequenzer aufgewendet.
+Der Plan, den Sequenzer mit Hilfe des Pseudo-Sequnzers genau durchzuplanen und ihn dann in das Framework zu integrieren, ist aber nicht aufgegangen.
+Bei der Integration ins EEROS habe ich gemerkt, dass viele Konzepte nicht so funktionierten, wie ich es geplant hatte.
+Einige Teile konnte ich mit aufwändig in kleinen Schritten integrieren, andere Teile musste ich verwerfen und neu durchdenken, weil sie nicht möglich waren.
+
+Die vielen unvorhergesehenen Komplikationen haben meinen Zeitplan durcheinander gebracht.
+Aus diesem Grund konnte ich die Software nicht ausgiebig testen.
+
+In dieser Arbeit habe ich nicht nur vieles neues Wissen bezüglich der Programmiersprache C++ aneignen, ich habe auch eine Lektion in Software-Management gelernt.
+Für Software eignet sich der Ansatz, erst alles durchplanen, dann alles integrieren und am Schluss die komplette Software durchtesten, nicht gut.
+In meinem nächsten Software-Projekt werde ich viel mehr auf kleine, aber dafür viele Iterationen planen-implementieren-testen setzen.
+Diese Strategie habe ich bei dieser Arbeit leider erst am Schluss eingesetzt.
+Besonders auf das Testen werde ich bei der nächsten Arbeit grösseren Wert legen.
+
 
 \section{Ausblick}
+Der neue Sequenzer bildet eine gute Grundlage für einfach verständliche Abläufe mit sehr hoher Flexibilität.
+Allerdings wurde er noch nicht ausgiebig getestet, so dass keine Aussage über die Zuverlässigkeit gemacht werden kann.
+
+Des weiteren gibt es noch einige offene Punkte:
+\begin{itemize}
+\item Genau überprüfen, ob alle Ziele erreicht wurden.
+\item Race-Condition. Zum Beispiel wenn mehrere parallel laufende Sequenzen auf das \textit{SafetySystem} oder das \textit{ControlSystem} zugreifen wollen.
+\item Geregelter Zugriff auf das \textit{ControlSystem}. Evt. wird von einer Sequenz exklusiven Zugriff auf Teile des \textit{ControlSystem} verlangt, so dass sie nicht von einer anderen Sequenz gestört wird.
+\item Onlinedokumentation auf der EEROS-Homepage nachführen.
+\end{itemize}

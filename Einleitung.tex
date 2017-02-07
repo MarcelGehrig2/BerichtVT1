@@ -1,28 +1,49 @@
 \chapter{Einleitung}
 
 
-\section{Vorwort}
-%TODO
+\section{Git-Repositories}
+Dieses Dokument enthält die gesamte Dokumentation.
+Zusätzlich wurden auf drei verschiedenen Git-Repositories entwickelt.
+
+\textbf{Pseudo Sequencer}\\
+Der \textit{Pseudo Sequencer} wurde am Anfang der Entwicklung geschrieben, um Zusammenhänge zu verstehen und das ganze Konzept logisch zu verstehen.
+Er erhält der C++ ähnelt, ist aber nicht lauffähig.
+\begin{itemize}
+\item \url{https://github.com/MarcelGehrig2/pseudoSequencer}
+\end{itemize}
+
+\textbf{TestApp}
+Dieses Repository wurde synchron mit der EEROS-Repository mitentwickelt.
+Wenn beim Sequenzer im EEROS-Repository eine neue Funktion eingebaut wurde, wurde sie vor dem Commit mit dieser Testapplikation getestet.
+\begin{itemize}
+\item \url{https://github.com/MarcelGehrig2/testAppVt1}
+\end{itemize}
+
+\textbf{EEROS-Repository}
+Das EEROS-Repository ist ein Fork vom originalen EEROS-Repository (Hash: f4d8c8e32c138fdca5d1eb47d6e821c374c2cf07).
+In diesem Repository wurde der Sequenzer entwickelt.
+\begin{itemize}
+\item \url{https://github.com/MarcelGehrig2/eeros-vt1}
+\end{itemize}
 
 
-%TODO referenz auf Repos !!!!!!!!!!!!!!!!!!!!
 
 \section{EEROS}
 % kurze beschreibung von eeros
-EEROS (Easy, Elegant, Reliable, Open and Safe) ist ein open source Software Framework, welches an der NTB entwickelt wurde und auch immer noch weiter Entwicklung wird. 
-Das Ziel von EEROS ist, möglichst einfach, zuverlässig und einfach in der Bedienung zu sein.
+EEROS (Easy, Elegant, Reliable, Open and Safe) ist ein echtzeitfähiges, Open Source Software Framework, welches an der NTB entwickelt wurde und auch immer noch weiter entwickelt wird. 
+Das Ziel von EEROS ist, möglichst zuverlässig und einfach in der Bedienung zu sein.
 Da das Framework besonders auch in industriellen Robotern zum Einsatz kommen soll, ist besonders auch die Zuverlässigkeit der Software ein wichtiger Punkt.
 Für die Software wird die objektorientierte Programmiersprache C++ verwendet. %TODO akronym für sw, besserer satz
 
 
 EEROS kann in vier Hauptbereiche unterteilt werden.
 \begin{enumerate}
-\item Die HAL (Hardware Abstraction Layer) welche als Schnittstelle zur Hardware dient.
-\item Das CS (Control System). Im CS wird die Regelung des Roboters aufgebaut.
-In diesem System wird aber nicht nur die Regelung gerechnet, sondern auch Aufgaben wie die Berechnung der Vorwärts- und inversen Kinematik werden hier erledigt.
+\item Die HAL (Hardware Abstraction Layer), welche als Schnittstelle zur Hardware dient.
+\item Das CS (\textit{ControlSystem}). Im CS wird die Regelung des Roboters aufgebaut.
+In diesem System wird aber nicht nur die Regelung gerechnet, sondern auch Aufgaben wie die Berechnung der Vorwärts- und Inverskinematik werden hier erledigt.
 \item Der Sequencer steuert den Ablauf des Roboters.
-Hier werden nicht nur Wegpunkte aufgelistet, sondern auch das allgemeine Verhalten definiert. %TODO besserer satz
-\item Im SS (Safety System) werden sicherheitsrelevante Parameter überwacht. Das SS arbeitet unabhängig vom CS und vom Sequencer. Es löst einen Not-Aus aus, wenn der Roboter ausserhalb der zulässigen Parameter operiert. Ein möglicher Grund für einen Not-Aus wäre zum Beispiel, wenn sich der Roboterarm in einem Sicherheitsbereich zu schnell bewegt.
+Hier werden sowohl Wegpunkte aufgelistet, wie auch das allgemeine Verhalten definiert. %TODO besserer satz
+\item Im SS (\textit{SafetySystem}) werden sicherheitsrelevante Parameter überwacht. Das SS arbeitet unabhängig vom CS und vom Sequencer. Es löst ein Not-Aus aus, wenn der Roboter ausserhalb der zulässigen Parameter operiert. Ein möglicher Grund für ein Not-Aus wäre zum Beispiel, wenn sich der Roboterarm in einem Sicherheitsbereich zu schnell bewegt.
 \end{enumerate}
 
 
@@ -33,25 +54,25 @@ Hier werden nicht nur Wegpunkte aufgelistet, sondern auch das allgemeine Verhalt
 
 \section{Klarstellung der Benennungen}
 % Mischung englisch deutsch
-Mit den meisten Programmiersprachen werden in englisch codiert.
-Auch die offizielle Onlinedokumentation \cite{eerosOrg} von EEROS, und die Benennung von Komponenten und Konzepten,  ist in Englisch.
+Die meisten Programmiersprachen werden in Englisch codiert.
+Auch die offizielle Onlinedokumentation \cite{eerosOrg} von EEROS und die Benennung von Komponenten und Konzepten ist in Englisch.
 In diesem Dokument wird an vielen Stellen bewusst darauf verzichtet, englische Bezeichnungen auf Deutsch zu übersetzen.
 Dies kann zu Deutsch - Englischen Mischwörter führen.
 Solche Mischwörter sind zwar nicht elegant, können aber besser für die Verständlichkeit sein und werden deshalb mit Absicht verwendet.
-Auch einige Eigennamen, wie z.B. \textit{Sequencer} anstelle von \textit{Sequenzer} werden in diesem Dokument nicht auf Deutsch übersetzt.
+Auch einige Eigennamen, wie z.B. \textit{Sequencer} anstelle von \textit{Sequenzer}, werden in diesem Dokument nicht immer auf Deutsch übersetzt.
 
 In dieser Arbeit wird oft von drei verschiedenen Kategorien von Entwicklern gesprochen.
-Es wird zwischen EEROS-, Steuerungs-, und Applikationsentwickler unterschieden.
+Es wird zwischen EEROS-, Steuerungs- und Applikationsentwickler unterschieden.
 
 Der \textbf{EEROS-Entwickler} hat vertiefte Kenntnisse der Programmiersprache C++ und vom EEROS Framework.
 Seine Hauptaufgabe ist die Weiterentwicklung des Frameworks, welches vom Steuerungsentwickler verwendet wird.
 
-Der \textbf{Steuerungsentwickler} hat ebenfalls gute C++ Kompetenzen und nutzt das Framework, um eine Steuerung für einen Roboter zu entwickeln.
-Dafür muss er seine Software speziell auf den Roboter anpassen.
+Der \textbf{Steuerungsentwickler} hat ebenfalls gute C++ Kompetenzen und nutzt das Framework um eine Steuerung für einen Roboter zu entwickeln.
+Dafür muss er seine Software speziell an den Roboter anpassen.
 Er bereitet auch erste Sequenzen für den Applikationsentwickler vor.
-Oft wird die Entwicklung der Steuerung und der Applikation von der selben Person übernommen.
+Oft wird die Entwicklung der Steuerung und der Applikation von derselben Person übernommen.
 
-Um den Ablauf des Roboters anzupassen, kann der \textbf{Applikationsentwickler} bestehende Sequenzen einfach anpassen.
+Um den Ablauf des Roboters anzupassen kann der \textbf{Applikationsentwickler} bestehende Sequenzen einfach abändern.
 Dazu werden nur grundlegende Programmierfähigkeiten benötigt.
 Mit etwas erweiterten Kenntnissen kann er auch neue Sequenzen erstellen.
 
@@ -60,12 +81,12 @@ Mit etwas erweiterten Kenntnissen kann er auch neue Sequenzen erstellen.
 \section{Aufgabenstellung}
 In der aktuellen Version von EEROS existiert bereits eine erste Version von einem Sequencer.
 Dieser ist in seiner Funktionalität und Übersichtlichkeit aber stark eingeschränkt.
-Oft musste auf Tricks zurück gegriffen werden, damit bestimmte Aufgaben mit dem bestehenden Sequencer gelöst werden konnten.
+Oft musste auf Tricks zurückgegriffen werden, damit bestimmte Aufgaben mit dem bestehenden Sequencer gelöst werden konnten.
 Um eine bestehende Sequenz anpassen zu können, auch wenn der Ablauf nur geringfügig geändert werden soll, ist schon viel Fachwissen notwendig.
 
-In dieser Vertiefungsarbeit sollen diese beide Probleme gelöst werden.
+In dieser Vertiefungsarbeit sollen diese beiden Probleme gelöst werden.
 Es soll ein neuer Sequencer entwickelt werden, der flexibel für verschiedenste Arten von Robotern eingesetzt werden kann.
 Die Sequenzen, welche den Ablauf des Roboters beschreiben, sollen dabei möglichst einfach und übersichtlich aufgebaut sein.
-Dank dem einfachen Aufbau soll es auch für einen Applikationsentwickler möglich sein, Sequenzen anzupassen und zu erstellen, auch wenn dieser Entwickler keine vertiefte Kenntnisse von C++ besitzt.
+Dank des einfachen Aufbaus soll es auch für einen Applikationsentwickler möglich sein Sequenzen anzupassen und zu erstellen, auch wenn er keine vertieften Kenntnisse von C++ besitzt.
 
 % vorgehen: requirement, konzept, ausarbeitung, implementierung

@@ -2,10 +2,10 @@
 \label{sequencerAufbau}
 \section{Sequencer}
 Das Sequencer-Objekt bildet die Basis für den ganzen \textit{Sequencer}.
-Für jede Applikation wird nur ein Sequencer Objekt erstellt.
+Für jede Applikation wird nur ein Sequencer-Objekt erstellt.
 Der Sequencer speichert automatisch einen Pointer zu jeder erstellten Sequenz.
-Da jeder Sequenz eine Referenz eine auf das Sequencer-Objekt mitgegeben wird, kann von jeder Sequenz aus auf das Sequencer-Objekt zugegriffen werden.
-Mit den Methoden \textit{getSequenceByID(int ID)} und \textit{getSeqenceByName(std::\_\_cxx11::string name)} können Pointer auf andere Sequenzen, auch parallel Laufende, geholt werden.
+Da jeder Sequenz eine Referenz auf das Sequencer-Objekt mitgegeben wird, kann von jeder Sequenz aus auf das Sequencer-Objekt zugegriffen werden.
+Mit den Methoden \textit{getSequenceByID(int ID)} und \textit{getSeqenceByName(std::\_\_cxx11::string name)} können Pointer auf andere Sequenzen, auch parallel laufende, geholt werden.
 Die Methode \textit{getSafetySystem()} gibt einen Pointer auf das \textit{SafetySystem} zurück.
 
 Jede Applikation hat eine andere \textit{ControlSystem}-Klasse.
@@ -14,8 +14,8 @@ Aus diesem Grund kann kein Pointer auf das \textit{ControlSystem} im \textit{Seq
 
 
 \section{Grundsätzlicher Ablauf}
-Im folgenden Abschnitt wird der grundsätzliche Ablauf des \textit{Sequencers} erklärt.
-Detaillierte Erklärungen zu den einzelnen Komponenten und deren Funktionen befinden sich in den nachfolgenden Kapiteln.
+Im folgenden Kapitel wird der grundsätzliche Ablauf des \textit{Sequencers} erklärt.
+Detaillierte Erklärungen zu den einzelnen Komponenten und deren Funktionen befinden sich in den weiter unten im Kapitel.
 
 \textit{Steps} und \textit{Sequencen} basieren beide auf der Basis-Klasse \textit{BaseSequence}.
 Der grundsätzliche Ablauf zur Laufzeit ist bei beiden Klassen gleich und läuft in folgender Reihenfolge ab:
@@ -27,9 +27,9 @@ Der grundsätzliche Ablauf zur Laufzeit ist bei beiden Klassen gleich und läuft
 \item Folgende Punkte werden periodisch, typischerweise mit einer Periodendauer von 100 Millisekunden, überprüft:
 \begin{itemize}
 \item \textit{checkExitCondition()}: Sobald diese \textit{Condition} zutrifft, wird die Sequenz oder der \textit{Step} beendet. Ist diese \textit{Condition} nicht definiert, wir die Sequenz oder der \textit{Step} sofort beendet.
-\item \textit{checkMonitorsOfThisSequence()}: Überprüft alle \textit{Monitore} von der Sequenz und setzt eine \textit{activeException} wenn notwendig.
-\item \textit{checkMonitorsOfThisSequence()}: Überprüft alle \textit{Monitore} von den Sequenzen, die durch die aktuelle blockiert werden, und setzt eine \textit{activeException} wenn notwendig.
-\item \textit{checkActiveException()}: Überprüft, ob die aktuelle, oder eine blockierte, Sequenz eine \textit{activeException} hat. Ist dies der Fall, dann wird der \textit{RunningState} der aktuellen Seqeunz entsprechend gesetzt. 
+\item \textit{checkMonitorsOfThisSequence()}: Überprüft alle \textit{Monitore} von der Sequenz und setzt eine \textit{activeException}, wenn notwendig.
+\item \textit{checkMonitorsOfThisSequence()}: Überprüft alle \textit{Monitore} von den Sequenzen, die durch die aktuelle blockiert werden, und setzt eine \textit{activeException}, wenn notwendig.
+\item \textit{checkActiveException()}: Überprüft, ob die aktuelle, oder eine blockierte, Sequenz eine \textit{activeException} hat. Ist dies der Fall, wird der \textit{RunningState} der aktuellen Seqeunz entsprechend gesetzt. 
 \end{itemize}
 \item Wenn der \textit{RunningState = restarting}, dann wird die Sequenz wiederholt.
 \end{enumerate} 
@@ -47,7 +47,7 @@ Die wichtigsten Methoden und Membervariablen, welche nicht selbsterklärend sind
 \begin{lstlisting}
 BaseSequence* callerSequence
 \end{lstlisting}
-Ein Pointer auf die Sequenz, welche die aktuelle Sequenz erzeugt hat.
+\textit{callerSequence} ist ein Pointer auf die Sequenz, welche die aktuelle Sequenz erzeugt hat.
 Die \textit{callerSequence} von der \textit{MainSequence} ist ein NULL-Pointer.
 
 
@@ -58,7 +58,7 @@ Innerhalb von Sequenzen können neue Sequenzen erstellt werden.
 Es kann zum Beispiel in der Hauptsequenz eine Sequenz \textit{SeqA1} erzeugt werden.
 In der \textit{SeqA1} kann noch eine Sequenz \textit{SeqA2} erzeugt werden.
 
-In diesem Beispiel enthält \textit{callerStack[0]} von \textit{SeqA2} ein Pointer auf die Hauptsequenz und \textit{callerStack[1]} enthält einen Pointer auf \textit{SeqA1}.
+In diesem Beispiel enthält \textit{callerStack[0]} von \textit{SeqA2} einen Pointer auf die Hauptsequenz und \textit{callerStack[1]} enthält einen Pointer auf \textit{SeqA1}.
 Der \textit{callerStack} von \textit{SeqA2} enthält aber keinen Pointer auf sich selbst.
 
 
@@ -67,7 +67,7 @@ std::vector< BaseSequence* > callerStackBlocking
 \end{lstlisting}
 Der \textit{callerStackBlocking} ist ein Vektor mit Pointer auf alle Sequenzen, die von der aktuellen Sequenz blockiert werden.
 
-Wird im vorherigen Beispiel \textit{SeqA1} nicht-blockieren gestartet, \textit{SeqA2} aber blockierend, dann läuft die Hauptsequenz unabhängig von \textit{SeqA1} und \textit{SeqA2} weiter.
+Wird, wie im vorherigen Beispiel \textit{SeqA1} nicht-blockierend gestartet, \textit{SeqA2} aber blockierend, dann läuft die Hauptsequenz unabhängig von \textit{SeqA1} und \textit{SeqA2} weiter.
 \textit{SeqA1} wird aber von \textit{SeqA2} blockiert und läuft erst weiter, wenn \textit{SeqA2} beendet ist.
 
 Unter diesen Umständen hat der \textit{callerStackBlocking} von \textit{SeqA2} nur einen Eintrag mit einem Pointer auf \textit{SeqA1}, da nur diese Sequenz von \textit{SeqA2} blockiert wird.
@@ -78,7 +78,7 @@ bool exceptionIsActive
 \end{lstlisting}
 Die Membervariable \textit{lstlisting} wird \textit{true} gesetzt, wenn die Sequenz wegen einer \textit{Exception} abgebrochen oder neu gestartet wird.
 Eine solche Exception wird von einem Monitor ausgelöst.
-Die Funktion eines Monitors, und der Zusammenhang mit einer \textit{Exception} wird im Kapitel \ref{Monitor} genauer beschrieben.
+Die Funktion eines Monitors und der Zusammenhang mit einer \textit{Exception} wird im Kapitel \ref{Monitor} genauer beschrieben.
 
 
 \begin{lstlisting}
@@ -158,11 +158,11 @@ Bei einem Rückgabewert \textit{false} wird die Sequenz übersprungen.
 \begin{lstlisting}
 virtual bool checkExitCondition();
 \end{lstlisting}
-Ein \textit{Step}, oder eine \textit{Sequenz} wird erst dann beendet, wenn diese Methode den Wert \textit{true} zurück gibt, oder wenn der \textit{Step} durch eine \textit{Exception} abgebrochen wird.
-Wird \textit{checkExitCondition()} nicht überschrieben, dann wird eine \textit{Sequence} sofort nach der \textit{action()}-Methode, die bei einem \textit{Step} nur ein kurzer Befehl ans \textit{ControSystem} sein soll, beendet.
+Ein \textit{Step}, oder eine \textit{Sequenz}, wird erst dann beendet, wenn diese Methode den Wert \textit{true} zurück gibt, oder wenn der \textit{Step} durch eine \textit{Exception} abgebrochen wird.
+Wird \textit{checkExitCondition()} nicht überschrieben, dann wird eine \textit{Sequenz} sofort nach der \textit{action()}-Methode, die bei einem \textit{Step} nur ein kurzer Befehl ans \textit{ControSystem} sein sollte, beendet.
 
-\textit{checkExitCondition()} kann bei einer benutzerdefinierten \textit{Sequence} überschrieben werden.
-Eine mögliche Implementierung wäre bei einem benutzerdefinierten \textit{Step} "\textit{moveTo(x, y)}", dass der \textit{Step} erst dann abgeschlossen ist, wenn der Roboter die Position erreicht hat.
+\textit{checkExitCondition()} kann bei einer benutzerdefinierten \textit{Sequenz} überschrieben werden.
+Eine mögliche Implementierung wäre bei einem benutzerdefinierten \textit{Step} "\textit{moveTo(x, y)}", dass der \textit{Step} erst dann abgeschlossen ist, wenn der Roboter seine Position erreicht hat.
 
 
 
@@ -173,10 +173,10 @@ Diese Methode wird von allen benutzerdefinierten Sequenzen überschrieben und en
 
 Ein \textit{Step} soll in einer Anwendung eine ganz spezifische Aufgabe übernehmen.
 Wenn der Roboter zu einer bestimmten Koordinate fahren soll, dann wäre \textit{moveTo(x, y)} ein möglicher, benutzerdefinierter \textit{Step}.
-In der benutzerdefinierten Klasse \textit{MoveTo} würde man dann die Methode \textit{action()} überschreiben, und die notwendigen Befehle an das \textit{ControlSystem} eingefügt.
+In der benutzerdefinierten Klasse \textit{MoveTo} würde man dann die \textit{action()}-Methode überschreiben und die notwendigen Befehle an das \textit{ControlSystem} eingefügt.
 Die \textit{action()}-Methode selbst darf nicht blockierend sein, da ansonsten die \textit{Monitore} während der Blockierung nicht überprüft werden.
 
-Die Methode \textit{action()} von einer \textit{Sequenz} kann mehrere blockierende \textit{Steps} und \textit{Sequenzen} beinhalten, aber sie darf sonst keine blockierende Befehle beinhalten.
+Die \textit{action()}-Methode einer \textit{Sequenz} kann mehrere blockierende \textit{Steps} und \textit{Sequenzen} beinhalten, aber sie darf sonst keine blockierenden Befehle beinhalten.
 Wenn eine blockierende Funktion benötigt wird, muss ein benutzerspezifischer \textit{Step} mit einer entsprechenden \textit{excitCondition} benutzt werden.
 
 
@@ -185,9 +185,9 @@ Wenn eine blockierende Funktion benötigt wird, muss ein benutzerspezifischer \t
 \begin{lstlisting}
 int actionFramework()
 \end{lstlisting}
-\textit{actionFramework()} wird von der \textit{run()}-Methode aufgerufen.
+Die \textit{actionFramework()}-Methode wird von der \textit{run()}-Methode aufgerufen.
 In dieser Methode werden alle \textit{Monitore} und \textit{Conditions} überprüft.
-Die Methode \textit{action()} wird von hier aus aufgerufen, wenn keine \textit{Exception} vorliegt und die Überprüfung der \textit{PreCondition} erfolgrich war.
+Die \textit{action()}-Methode wird von hier aus aufgerufen, wenn keine \textit{Exception} vorliegt und die Überprüfung der \textit{PreCondition} erfolgrich war.
 Wenn erforderlich, wird \textit{action()} mehrmals aufgerufen.
 
 
@@ -214,7 +214,7 @@ Die Klasse \textit{Sequence} wird von den Klassen \textit{BaseSequence} und \tex
 Wenn eine \textit{Sequence} erstellt wird, wird automatisch ein Thread gestartet, in dem die \textit{run()}-Methode läuft.
 Der Thread wird dann sofort schlafen gelegt.
 
-Wird die \textit{Sequence} dann von der Hauptsequenz oder einer anderen Sequenz aus nicht blockierend gestartet, dann wird die Methode \textit{actionFramework()} im Thread ausgeführt.
+Wird die \textit{Sequence} von der Hauptsequenz, oder einer anderen Sequenz aus nicht blockierend gestartet, dann wird die \textit{actionFramework()}-Methode im Thread ausgeführt.
 Wird sie aber blockierend gestartet, dann wird die \textit{actionFramwork()}-Methode in der \textit{start()}-Methode aufgerufen, welche die \textit{callerSequence} blockiert.
 
 
@@ -235,7 +235,7 @@ Andere \textit{Steps} oder Sequenzen können also nicht auf einen \textit{Step} 
 \textit{Condition}-Objekte werden für \textit{Monitoren}, siehe Kapitel \ref{Monitor}, gebraucht.
 
 In einer solchen Klasse soll ein beliebig komplexer oder einfacher Zustand überprüft werden.
-Beispiele für solche Zustande sind:
+Beispiele für solche Zustände sind:
 \begin{itemize}
 \item Endanschlag erreicht.
 \item Taster mit Toggle-Funktion. Die \textit{Condition} ist \textit{true}, wenn der Taster einmal gedrückt wird. Wird der Taster erneut gedrückt, ist sie \textit{false}.
@@ -249,13 +249,13 @@ virtual bool validate() = 0
 \end{lstlisting}
 Diese Methode wird vom \textit{Steuerungsentwickler} überschrieben.
 Alle Überprüfungen von Zuständen im \textit{ControlSystem}, oder von anderen Sequenzen, finden hier statt.
-In dieser Methode können auch Zustände oder Variablen gespeichert werden, und Zeitmessungen durchgeführt werden.
+In dieser Methode können auch Zustände oder Variablen gespeichert werden und Zeitmessungen durchgeführt werden.
 
 
 \begin{lstlisting}
 bool isTrue()
 \end{lstlisting}
-Überprüft, ob eine \textit{Condition} wahr ist.
+Überprüft, ob eine \textit{Condition} wahr ist, indem sie die \textit{validate()}-Methode aufruft.
 
 
 
@@ -263,7 +263,7 @@ bool isTrue()
 \label{Monitor}
 \textit{Monitore}, oder deutsch \textit{Beobachter}, sind ein zentraler Bestandteil vom Sequencer.
 Sie erlauben es, gewisse Zustände des Roboters permanent zu überwachen und zu reagieren, wenn eine Veränderung eintritt.
-\textit{Monitore} eignen sich gut, um Ausnahmefälle, sogenannte \textit{Exceptions} abzudecken.
+\textit{Monitore} eignen sich gut, um Ausnahmefälle, sogenannte \textit{Exceptions}, abzudecken.
 
 Ein \textit{Monitor} wird einer \textit{Sequence} oder einem \textit{Step} zugewiesen.
 Diese \textit{Sequence} ist dann der Besitzer, oder \textit{owner}, des \textit{Monitors}.
@@ -277,14 +277,14 @@ Ein \textit{Monitor} besteht aus folgenden Hauptkomponenten:
 \end{enumerate}
 
 \subsection{Condition}
-Der Zustand, der überwacht wird.
-Ein \textit{Condition}-Objekt muss erzeugt werden, und einem \textit{Monitor} als Pointer übergeben werden.
+Die \textit{Condition} ist Zustand, der überwacht wird.
+Ein \textit{Condition}-Objekt muss erzeugt werden und einem \textit{Monitor} als Pointer übergeben werden.
 Die \textit{Condition} wird regelmässig, abhängig von der \textit{pollingTime} der \textit{Sequence}, überprüft.
 
 
 \subsection{Exception Sequence}
-Eine \textit{Exception Sequence} muss ausserhalb des Monitors erzeugt werden, und als Pointer dem Monitor übergeben werden.
-Sobald die \textit{Condition} wahr wird, wird die \textit{Exception Sequence} gestarted.
+Eine \textit{Exception Sequence} muss ausserhalb des Monitors erzeugt werden und als Pointer dem Monitor übergeben werden.
+Sobald die \textit{Condition} wahr wird, wird die \textit{Exception Sequence} gestartet.
 Es kann auch keine \textit{Exception Sequence} übergeben werden.
 
 \subsection{Behavior}
@@ -293,9 +293,9 @@ Das \textit{Behavior} definiert das Verhalten nachdem die \textit{Exception Sequ
 Folgende \textit{Behavior} sind möglich:
 \begin{enumerate}
 \item \textbf{nothing}: Die Sequenz wird ganz normal weitergeführt.
-\item \textbf{abortOwner}: Die Besitzer-Sequenz des Monitors, und alle Unter-Sequenzen der Besitzer-Sequenz, wird abgebrochen.
+\item \textbf{abortOwner}: Die Besitzer-Sequenz des Monitors und alle Unter-Sequenzen der Besitzer-Sequenz, werden abgebrochen.
 \item \textbf{restartOwner}: Die Besitzer-Sequenz wird abgebrochen und neu gestartet.
-\item \textbf{abortCallerofOwner}: Die \textit{callerSequence}, und damit natürlich auch die Besitzer-Sequenz, wird abgebrochen.
+\item \textbf{abortCallerofOwner}: Die \textit{callerSequence}, und damit natürlich auch die Besitzer-Sequenz, werden abgebrochen.
 \item \textbf{restartCallerofOwner}: Die \textit{callerSequence} wird abgebrochen und neu gestartet.
 \end{enumerate}
 

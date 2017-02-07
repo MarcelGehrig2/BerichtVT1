@@ -1,7 +1,4 @@
 \chapter{EEROS aktueller Stand}
-\section{EEROS generell}
-%TODO
-
 
 \section{Aktuelle Implementierung des Sequencers}
 Für EEROS besteht bereist ein rudimentärer \textit{Sequencer}.
@@ -11,7 +8,7 @@ In der Onlinedokumentation \cite{eerosOrg} wird noch vertiefter in die Details d
 
 \subsection{Sequencer}
 Die Grundlage bildet ein Sequencer-Objekt, das in einem Nicht-Realtime-Thread läuft.
-In so einem \textit{Sequencer} können eine Serie von blockierenden \textit{Sequences} aufgerufen werden.
+In solch einem \textit{Sequencer} können eine Serie von blockierenden \textit{Sequences} aufgerufen werden.
 Wenn mehrere parallele \textit{Sequences} aufgerufen werden sollen, muss für jede \textit{Sequence} ein eigener \textit{Sequencer} erstellt werden.
 
 \begin{figure}[!ht]
@@ -25,10 +22,10 @@ Wenn mehrere parallele \textit{Sequences} aufgerufen werden sollen, muss für je
 \subsection{Sequence}
 Eine \textit{Sequence} führt als erstes eine benutzerdefinierte Initialisierungsfunktion aus.
 Als nächstes wird eine \textit{preCondition} überprüft.
-Fehlt die Überprüfung fehl, wird die \textit{Sequence} abgebrochen.
-Bei einem positiven Ergebnis wird der Hauptteil, eine Abfolge von definierten \textit{Steps} ausgeführt.
+Schlägt die Überprüfung fehl, wird die \textit{Sequence} abgebrochen.
+Bei einem positiven Ergebnis wird der Hauptteil, eine Abfolge von definierten \textit{Steps}, ausgeführt.
 Dem letzten \textit{Step} folgt noch eine Überprüfung einer \textit{postCondition}.
-Läuft der \textit{Sequencer} im \textit{stepping-mode}, wird die \textit{Sequence} bei jeden \textit{yield()} pausiert und wird erst fortgeführt, wenn der Befehl dazu gegeben wird. \cite{eerosWiki}
+Läuft der \textit{Sequencer} im \textit{stepping-mode} wird die \textit{Sequence} bei jedem \textit{yield()} pausiert und erst fortgeführt, wenn der Befehl dazu gegeben wird. \cite{eerosWiki}
 
 \begin{lstlisting}
 init();
@@ -58,7 +55,7 @@ Ein \textit{Step} ist eine vom \textit{Steuerungsentwickler} festgelegte Einheit
 \subsection{Sub-Sequence}
 \textit{Subsequences} sind sehr ähnlich wie normale \textit{Sequenzen}.
 Sie können verwendet werden, wenn ein ähnlicher Ablauf mehrmals wiederholt werden soll.
-Durch eine Übergabe von Parameter an eine solche \textit{Subsequence} kann sie sehr flexibel gestaltet werden.
+Durch eine Übergabe von Parametern an eine solche \textit{Subsequence} kann sie sehr flexibel gestaltet werden.
 Wenn die \textit{Subsequence} parallel, also nicht-blockierend, aufgerufen werden soll, muss sie einem neuen Sequencer übergeben werden.
 
 \begin{lstlisting}
@@ -81,8 +78,8 @@ private:
 
 \subsection{Error-Handler}
 Der \textit{Error-Handler} wird in der Onlinedokumentation zwar erwähnt, im Sourcecode von EEROS sind aber keine Spuren von der Implementierung zu finden.
-Der Dokumentation zu folge soll er \textit{Exceptions} behandeln.
-Je nach \textit{Exception} soll er flexibel reagieren, um Probleme zu beheben.
+Der Dokumentation zufolge soll er \textit{Exceptions} behandeln.
+Je nach \textit{Exception} soll er flexibel reagieren um Probleme zu beheben.
 
 
 
@@ -106,14 +103,18 @@ Je nach \textit{Exception} soll er flexibel reagieren, um Probleme zu beheben.
 
 \section{Fallbeispiel 'EEDURO Delta Roboter'}
 
-%\begin{figure}[!ht]
-%\centering
-%\includegraphics[angle=0,height=8cm]{images/ParallelScara.png}
-%\caption{Der Parallel Scara Roboter \protect\footnote{http://www.ntb.ch/projekt/parallel-scara/}}
-%\label{parallelScara}
-%\end{figure}
+%\begin{figure}[]
+\begin{figure}[!ht]
+\centering
+%\includegraphics[angle=0]{images/eeduroDelta.png}
+\includegraphics[angle=0]{images/eeduroDelta.png}
+\caption{Der EEDURO Delta Roboter}
+\label{bildDelta}
+\end{figure}
 
-Der \textit{EEDURO Delta Roboter} ist ein Roboter, dessen Hardware und auch Software an der NTB entwickelt wurde.
+
+
+Der \textit{EEDURO Delta Roboter} ist ein Roboter, dessen Hard- und auch Software an der NTB entwickelt wurde.
 Die Steuerung ist mit EEROS und dem bestehenden \textit{Sequencer} aufgebaut.
 Im folgenden Kapitel wird der Quellcode der Steuerung analyisiert um herauszufinden, welche Aspekte des bestehenden \textit{Sequencers} brauchbar sind, und wo er noch Lücken aufweist.
 
@@ -124,4 +125,31 @@ Der Quellcode der Steuerungssoftware ist auf folgendem Git-Repository zu finden:
 Die Software wurde vom Stand 10.10.2016 mit dem Hash \textit{\seqsplit{a25bcfa752516723f067f5a5166e8f09e60fc6e8}} verwendet.
 
 
-\subsection{asdf}
+\subsection{Betrachtung des bestehenden Sequencers vom Delta Roboter}
+Öffnet man die Hauptsequenz des Sequenzers wird schnell klar, dass die Sequenz alles andere als übersichtlich ist.
+Der Zugriff auf das \textit{ControlSystem} und der Zugriff auf des \textit{SafetySystem} sind verwoben mit dem eigentlichen Ablauf des Roboters.
+
+Auch wenn man Erfahrungen hat zum C++ Source Code zu lesen, ist es nicht einfach, den Ablauf zu verstehen.
+Zusätzlich ist es an manchen Stellen notwendig, dass man weiss, wie das \textit{ControlSystem} aufgebaut ist.
+
+Oft wird auch das \textit{SafetySystem} verwendet um gewisse Abläufe zu programmieren.
+Die Zeile \textit{safetySys->triggerEvent(doParking);} löst zum Beispiel im \textit{SafetySystem} einen Event aus welcher, über den Umweg von zwei Safety-Level und noch einem zusätzlichen Event, folgenden Code ausführt:
+
+\begin{lstlisting}
+static unsigned int count = 0;
+
+if(count == 1) {
+	controlSys->setVoltageForInitializing({q012InitVoltage, q012InitVoltage, q012InitVoltage, q3InitVoltage});
+}
+else if(count > static_cast<unsigned int>(2.0 / dt)) {
+	if(controlSys->switchToPosControl()) {
+		privateContext->triggerEvent(homeingDone);
+	}
+	count = 0;
+}
+count++;
+\end{lstlisting}
+
+Dieser Code-Teil übernimmt das \textit{Homeing} des Roboters.
+Von der Logik her, wäre er besser im Sequencer untergebracht.
+Das \textit{SafetySystem} sollte möglichst einfach aufgebaut sein, damit es weniger Angriffspunkte für Fehler hat und zuverlässiger läuft.

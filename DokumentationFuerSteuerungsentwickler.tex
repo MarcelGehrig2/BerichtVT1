@@ -1,7 +1,7 @@
 \chapter{Dokumentation für Steuerungsentwickler}
-Dieses Kapitel ermöglicht einen leichten Einstig in den neuen Sequencer.
-Es deckt aber nicht vollständig alle Details von allen Funktionen des Sequencer ab.
-Eine detailliertere Beschreibung des \textit{Sequencers} und von dessen Funktionen findet sich im Kapitel \ref{sequencerAufbau}.
+Dieses Kapitel ermöglicht einen leichten Einstieg in den neuen Sequencer.
+Es deckt aber nicht alle Details von allen Funktionen des \textit{Sequenzers} vollständig ab.
+Eine detailliertere Beschreibung des \textit{Sequenzers} und von dessen Funktionen findet sich im Kapitel \ref{sequencerAufbau}.
 
 
 \section{Den Sequencer erstellen}
@@ -27,10 +27,10 @@ mainSequence.join();	//The application only stops, when the mainSequence is fini
 
 
 \section{Benutzerdefinierte Klassen}
-Der Kern des neuen \textit{Sequencers} sind benutzerdefinierte Klassen, welche von vordefinierten EEROS-Klassen abgeleitet werden.
+Den Kern des neuen \textit{Sequencers} bilden benutzerdefinierte Klassen, welche von vordefinierten EEROS-Klassen abgeleitet werden.
 Dieses System erlaubt dem \textit{Steuerungsentwickler} die spezifische Implementierung von Funktionen hinter Klassen mit sinnvollen Namen zu verstecken.
 
-Weil die Implementierung in den benutzerdefinierten Klassen versteckt wird, können einfach verständliche Sequenzen aufgebaut werden
+Weil die Implementierung in den benutzerdefinierten Klassen versteckt wird, können einfach verständliche Sequenzen aufgebaut werden.
 
 Die wichtigsten EEROS-Klassen für diesen Zweck sind:
 \begin{itemize}
@@ -39,9 +39,9 @@ Die wichtigsten EEROS-Klassen für diesen Zweck sind:
 \item Condition
 \end{itemize}
 
-In den folgenden Kapitel wird mit Hilfe von einem Pseudo-System demonstriert, wie diese Klassen verwendet werden können.
+In den folgenden Kapiteln wird mit Hilfe von einem Pseudo-System demonstriert, wie diese Klassen verwendet werden können.
 
-\section{Beispiel für eine mainSequence}
+\section{Beispiel für eine Hauptsequenz}
 
 \textit{MainSequence.hpp:}\
 \begin{lstlisting}
@@ -78,7 +78,7 @@ Dafür muss zusätzlich der \textit{Constructor} angepasst werden.
 
 \textit{int action();} ist die wichtigste Methode, denn sie beinhaltet den Ablauf der Sequenz.
 
-\textbf{Zeile 15} bis \textbf{Zeile 20} beschreiben benutzerdefiniert Sequenzen, die von der Hauptsequenz aus gestartet werden.
+\textbf{Zeile 15} bis \textbf{Zeile 20} beschreiben benutzerdefinierte Sequenzen, die von der Hauptsequenz aus gestartet werden.
 
 
 \textit{MainSequence.cpp:}\
@@ -126,7 +126,7 @@ int MainSequence::action()
 In \textbf{Zeile 9} wird die Basis-Sequenz und der Pointer für das \textit{ControlSystem} initialisiert.
 Zusätzlich müssen auch alle Sequenzen, die in dieser Sequenz genutzt werden, initialisiert werden.
 Die ersten drei Parameter sind dabei immer gleich.
-Der vierte Parameter ist der Namen der Sequenz.
+Der vierte Parameter ist der Name der Sequenz.
 
 \textbf{Zeile 17} definiert diese Sequenz als nicht-blockierend.
 Die Hauptsequenz von einer Applikation muss immer nicht-blockierend sein.
@@ -135,14 +135,14 @@ Andere Sequenzen können blockierend sein.
 Die \textbf{Zeile 19} aktiviert für die Sequenz \textit{seqA1} den Timeout und setzt die Zeit auf 5.1 Sekunden.
 Wenn \textit{seqA1} nach 5.1 Sekunden Laufzeit noch nicht fertig abgearbeitet wurde, wird \textit{seqEA1} ausgeführt.
 Nachdem die Exception-Sequenz \textit{seqEA1} beendet wurde, wird \textit{seqA1} neu gestartet, da dieses Verhalten in \textbf{Zeile 21} definiert wurde.
-Mehr Informationen zum Verhalten findet sich im Kapitel \ref{monitorUndCondition}.
+Mehr Informationen zum Verhalten finden sich im Kapitel \ref{monitorUndCondition}.
 
 Durch den Befehl in \textbf{Zeile 23} wird \textit{seqA1}, unabhängig vom vordefinierten Standard von \textit{SequenceA}, blockierend ausgeführt.
 
-In der Methode \textit{action()} wird der eigentliche Ablauf von der Sequenz definiert.
+In der Methode \textit{action()} wird der eigentliche Ablauf der Sequenz definiert.
 Als erstes wird \textit{seqB1} gestartet.
-Da diese, und auch \textit{seqB2}, nicht-blockierend sind, wird sofort auch \textit{seqB2} und \textit{seqA1} gestartet.
-Weil \textit{seqA1} den weiteren Ablauf blockiert, bis sie fertig gestellt wurde, wird \textit{seqB3} erst ausgeführt, wenn \textit{seqA1} beendet wurde.
+Da diese, und auch \textit{seqB2}, nicht-blockierend sind, werden sofort auch \textit{seqB2} und \textit{seqA1} gestartet.
+Weil \textit{seqA1} den weiteren Ablauf blockiert, bis sie fertig gestellt ist, wird \textit{seqB3} erst ausgeführt, wenn \textit{seqA1} beendet wurde.
 
 Mit den \textit{join()}-Befehlen kann sichergestellt werden, dass die Hauptsequenz erst dann beendet wird, wenn die entsprechenden, parallel laufenden Sequenzen fertig abgearbeitet wurden.
 
@@ -177,7 +177,7 @@ namespace testappsequencer {
 };
 \end{lstlisting}
 
-Der Aufbau von dieser Sequenz ähnelt stark dem Aufbau von der Hauptsequenz.
+Der Aufbau dieser Sequenz ähnelt stark dem Aufbau von Hauptsequenz.
 Der einzige Unterschied ist die Methode \textit{int operator()(int a, int b);}.
 Diese Methode wird aufgerufen, bevor die Sequenz gestartet wird und kann genutzt werden, um Parameter zu übergeben.
 Je nach Bedarf können die Typen und Anzahl der Parameter frei gewählt werden, oder mit \textit{int operator()();} ganz weggelassen werden.
@@ -224,10 +224,10 @@ int SequenceA::action()
 
 \end{lstlisting}
 
-Mit dem Befehl \textit{setIsBlocking()} im Konstruktor werden standardmässig alle Sequenzen von der Klasse \textit{SequenceA} blockierend ausgeführt.
-Der Befehl \textit{seqA1.setIsBlocking();} aus \textit{MainSequence.cpp} ist somit nicht notwendig.
+Mit dem Befehl \textit{setIsBlocking()} im Konstruktor werden standardmässig alle Sequenzen der Klasse \textit{SequenceA} blockierend ausgeführt.
+Der Befehl \textit{seqA1.setIsBlocking()} aus \textit{MainSequence.cpp} ist somit nicht notwendig.
 
-Es ist zwingen notwendig, dass die Methode \textit{operator()} implementiert wird.
+Es ist zwingend notwendig, dass die Methode \textit{operator()} implementiert wird.
 Ebenfalls erforderlich ist, dass der letzte Befehl von dieser Methode \textit{return Sequence::start();}  lautet.
 Wenn der Sequenz Parameter übergeben werden, dann können hier die Variablen gespeichert werden.
 
@@ -318,7 +318,7 @@ Im \textit{SequenceA.cpp} wurde aber noch der Timeout aktiviert.
 Das bedeutet, dass \textit{seqEA2} gestartet wird, wenn die Zielposition nicht innerhalb von 5 Sekunden erreicht wird.
 
 In Zeile \textbf{33} wird demonstriert, wie ein Pointer auf eine parallel laufende Sequenz geholt werden kann.
-Der \textit{Typecast} ist notwendig, dass die für die Klasse \textit{SequenceB} spezifische Methode \textit{setLastReachedPosition(int pos)} (diese Methode wird in dieser Arbeit nicht definiert) verwendet werden kann.
+Der \textit{Typecast} ist notwendig, damit die für die Klasse \textit{SequenceB} spezifische Methode \textit{setLastReachedPosition(int pos)}, (diese Methode wird in dieser Arbeit nicht definiert) verwendet werden kann.
 
 
 
@@ -377,8 +377,8 @@ bool IsBlocked::validate()
 Mit der \textit{Condition IsBlocked} kann jetzt einfach überprüft werden, ob der Roboter blockiert ist.
 
 Mit einem \textit{Monitor} können wir diese Überprüfung automatisieren.
-Mit dem \textit{Monitor} lässt auch einfach festlegen, was passieren soll, wenn der Roboter blockiert.
-Das Prinzip ist das gleiche wie bei einem Timeout.
+Mit dem \textit{Monitor} lässt sich auch einfach festlegen, was passieren soll, wenn der Roboter blockiert.
+Das Prinzip ist das selbe wie bei einem Timeout.
 
 Dafür ergänzen wir \textit{MainSequence.hpp} und \textit{MainSequence.cpp}.
 
@@ -431,7 +431,7 @@ Die \textbf{Zeilen 4, 5, 6} und \textbf{16} wurden hinzugefügt.
 Solange \textit{seqA1} läuft, wird mit der \textit{Condition IsBlocked} überprüft, ob der Roboter blockiert.
 Sobald der Roboter blockiert, wird die Sequenz \textit{seqEA1isBlockt} ausgeführt.
 Die Sequenz kann genutzt werden, um die Blockierung zu lösen.
-Nachdem die Exception Sequenz abgearbeitet wurde, wird \textit{seqA1}, wegen dem Verhalte \textit{restartOwner} wiederholt.
+Nachdem die Exception Sequenz abgearbeitet wurde, wird \textit{seqA1}, wegen dem Verhalten \textit{restartOwner}, wiederholt.
 
 Folgende Verhalten sind bei einer \textit{Exception} möglich:
 \begin{itemize}
